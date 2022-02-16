@@ -1,22 +1,38 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { Route, Routes } from "react-router";
 import './App.css';
+import Login from './components/login/Login';
 
-function App() {
+const USERS = [
+  {
+    username: "Etienne",
+    password: "chocolate"
+  },
+  {
+    username: "Ishan",
+    password: "strawberry"
+  },
+  {
+    username: "Girimer",
+    password: "apple"
+  }
+]
+
+const App = () => {
+  const [isUser, setIsUser] = useState(false);
+  const [userList, setUserList] = useState(USERS);
+
+  const loginHandler = (enteredUser) => {
+    if (enteredUser in userList) {
+      setIsUser(true);
+    }
+    console.log(isUser);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Login logUser={loginHandler}/>
       </header>
     </div>
   );
