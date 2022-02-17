@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import ReactDOM from 'react-dom';
 
 
@@ -25,6 +26,7 @@ const Login = (props) => {
         props.logUser(user);
         setEnteredUsername("");
         setEnteredPassword("");
+        console.log(props.auth);
     }
 
     return (
@@ -45,7 +47,11 @@ const Login = (props) => {
                     onChange={passwordChangeHandler}
                 />
             </div>
-            <button onClick={loginHandler}>Login</button>
+            <Link onClick={loginHandler} to={props.auth ? ("/home") : ("/")}>
+                <button type="button">
+                    Login
+                </button>
+            </Link>
         </div>
     )
 }
