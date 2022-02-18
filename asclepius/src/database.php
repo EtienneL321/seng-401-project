@@ -1,16 +1,19 @@
-<?php
-// PHP Data Objects(PDO) Sample Code:
-try {
-    $conn = new PDO("sqlsrv:server = tcp:seng401-sv.database.windows.net,1433; Database = seng401-db", "njoy", "QUO=?vGO_PhCZZ)OpoPy|*S:dxB#+T;73&8GIJ/R|.gfyvnN8'");
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch (PDOException $e) {
-    print("Error connecting to SQL Server.");
-    die(print_r($e));
-}
-
-// SQL Server Extension Sample Code:
-$connectionInfo = array("UID" => "njoy", "pwd" => "QUO=?vGO_PhCZZ)OpoPy|*S:dxB#+T;73&8GIJ/R|.gfyvnN8'", "Database" => "seng401-db", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
-$serverName = "tcp:seng401-sv.database.windows.net,1433";
-$conn = sqlsrv_connect($serverName, $connectionInfo);
-?>
+-- Insert rows into table 'dbo.staff'
+INSERT INTO dbo.staff
+( -- columns to insert data into
+ [idStaff], [username], [password], [name], [address], [contactNum], [staffType], [clearanceLevel], [pharmName]
+)
+VALUES
+( -- first row: values for the columns in the list above
+ 1001,"jdoe", "12345", "John Doe", "403-555 2212", "123 maple st SW", "587-999 0202, D, 4, none"
+),
+( -- second row: values for the columns in the list above
+  1001,"mjane", "abcde", "Mary Jane", "403-555 2212", "123 oak st SW", "587-999 0202, N, 2, none"
+),
+( -- second row: values for the columns in the list above
+  1001,"jdoe", "098765", "John Doe", "403-555 2212", "123 birch st SW", "587-999 0202, D, 3, none"
+),
+( -- second row: values for the columns in the list above
+  1001,"admin", "asceplius", "Mike ", "403-555 2212", "123 starwars st SW", "587-999 0202, A, 5, none"
+)
+GO
