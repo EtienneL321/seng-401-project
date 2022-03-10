@@ -23,6 +23,17 @@ const USERS = [
   }
 ]
 
+const mysql = require("mysql");
+
+const db = mysql.createConnnection({
+  host: "seng401.c8o5onccwnvz.us-east-1.rds.amazonaws.com",
+  port: "3306",
+  user: "njoy",
+  password: "Joy12345~!",
+  database: "seng401",
+
+});
+
 const App = () => {
   const [isUser, setIsUser] = useState(false);
   const [userList, setUserList] = useState(USERS);
