@@ -29,14 +29,9 @@ const USERS = [
 const App = () => {
 
   useEffect(() => {
-    let info = { id: parameters.pid };
-    console.log(notifications);
-    Axios.get("http://localhost:3001/api/get/info", {params: info}).then((response) => {
-      setPatientInfo(response.data[0]);
-      checkNotifications(response.data[0].last_visit,response.data[0].followup_visit);
-      setDateLV(myToDate(response.data[0].last_visit));
-      setDateFV(myToDate(response.data[0].followup_visit));
-      getTreatmentInformation();
+    let info = { name: 'acai' };
+    Axios.get("http://localhost:3001/api/get/passwords", {params: info}).then((response) => {
+      console.log(response);
     });
   }, []);
 
