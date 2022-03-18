@@ -28,9 +28,10 @@ const USERS = [
 
 const App = () => {
 
+  // Getting staff info based on username
   useEffect(() => {
-    let info = { name: 'acai' };
-    Axios.get("http://localhost:3001/api/get/passwords", {params: info}).then((response) => {
+    let data = { username: 'acai' };
+    Axios.get("http://localhost:3001/api/get/staff/info", {params: data}).then((response) => {
       console.log(response);
     });
   }, []);
