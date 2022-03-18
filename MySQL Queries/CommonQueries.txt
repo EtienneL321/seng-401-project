@@ -1,0 +1,70 @@
+INCLUDED BELOW ARE COMMON QUERIES THAT CONTAIN ONLY ONE TABLE.
+YOU CAN REMOVE ATTRIBUTES TO GATHER ONLY THE DATA YOU ARE 
+INTERESTED IN.
+REPLACE ? WITH DESIRED SEARCH CRITERIA.
+CHARACTERS/STRINGS NEED TO BE CONTAINED WITHIN "".
+EX: where staff.username="Lpjj" and staff.password="chocolate"
+
+//STAFF//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT A STAFF MEMBER VIA USERNAME AND PASSWORD.
+USED FOR LOGING IN.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select staff.staffID, staff.username, staff.password, staff.Name, staff.Phone, staff.Address, staff.ContactNumber, staff.staffType, staff.clearanceLevel
+from staff
+where staff.username=? and staff.username=?
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+REPLACE "?" WITH DESIRED SEARCH CRITERIA.
+CHARACTERS/STRINGS NEED TO BE CONTAINED WITHIN "".
+EX: where staff.username="Lpjj" and staff.password="chocolate"
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+//PATIENTS//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT ALL PATIENTS
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select patients.patientID, patients.name, patients.address, patients.phone
+from patients
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+THE ONLY UNIQUE ATTRIBUTE IS THE patientID. IF YOU WANT TO SEARCH A
+SPECIFIC PATIENT ADD (where patient.patientID=1000) WHERE 1000 CAN BE
+ANY VALID patientID.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+//MEDICATIONS//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT ALL MEDICATIONS
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select medications.medicationID, medications.name, medications.use, medications.warnings
+from medications
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+THE ONLY UNIQUE ATTRIBUTES IS THE medicationID AND name. IF YOU WANT 
+TO SEARCH A SPECIFIC MEDICATION ADD (where medications.medicationID=1000)
+WHERE 1000 CAN BE ANY VALID patientID OR (where medications.name="Morphine")
+WHERE Morhine CAN BE ANY VALID MEDICATION name.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+//SUPPLIERS//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT ALL SUPPLIERS
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select suppliers.sName, suppliers.location, suppliers.phone
+from suppliers
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+THE ONLY UNIQUE ATTRIBUTE IS THE sName. IF YOU WANT 
+TO SEARCH A SPECIFIC MEDICATION ADD (where suppliers.sName="Life Line")
+WHERE Life Line CAN BE ANY VALID sName.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+//PRESCRIPTOINS//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT ALL PRESCRIPTIONS
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select prescriptions.prescriptionID, prescriptions.medicationID, prescriptions.amount, prescriptions.instructions, prescriptions.patientID, prescriptions.requesteeID, prescriptions.timeWritten, prescriptions.pharmisistID, prescriptions.timeFulfilled, prescriptions.receiverID, prescriptions.timeReceived
+from prescriptions
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+THE ONLY UNIQUE ATTRIBUTE IS THE prescriptionID. IF YOU WANT TO 
+SEARCH A SPECIFIC PRESCRIPTION ADD 
+(where prescriptions.prescriptionID=1000) WHERE 1000 CAN BE ANY 
+VALID prescriptionID.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
