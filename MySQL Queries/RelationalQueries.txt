@@ -81,3 +81,80 @@ where patients.name="?" and prescriptions.patientID=patients.patientID and patie
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 WHERE ? IS ANY VALID PATIENT name (eg Daniel Hicks).
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+//ALL PATIENTS MEDICAL NOTES//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT ALL MEDICAL NOTES BELONGING TO A PATIENT VIA
+PATIENT'S ID NUMBER.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select medical_notes.noteID, patients.name as patientName, patients.patientID, staff.Name as authorName, staff.staffID as authorID, medical_notes.dateTime, medical_notes.contents
+from medical_notes, staff, patients
+where medical_notes.patientID=? and medical_notes.patientID=patients.patientID and medical_notes.careGiverID=staff.staffID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE ? IS ANY VALID patientID (eg 1002).
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT ALL MEDICAL NOTES BELONGING TO A PATIENT VIA
+PATIENT'S NAME.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select medical_notes.noteID, patients.name as patientName, patients.patientID, staff.Name as authorName, staff.staffID as authorID, medical_notes.dateTime, medical_notes.contents
+from medical_notes, staff, patients
+where patients.name="?" and medical_notes.patientID=patients.patientID and medical_notes.careGiverID=staff.staffID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE ? IS ANY VALID PATIENT name (eg Bob White).
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+//ALL PATIENTS DIAGNOSES//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT ALL DIAGNOSES BELONGING TO A PATIENT VIA
+PATIENT'S ID NUMBER.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select diagnoses.diagnosisID, patients.name as patientName, patients.patientID, staff.Name as doctorName, staff.staffID as doctorID, diagnoses.date, diagnoses.name as diagnosis, diagnoses.comments
+from diagnoses, staff, patients
+where patients.patientID=? and diagnoses.patientID=patients.patientID and diagnoses.doctorID=staff.staffID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE ? IS ANY VALID patientID (eg 1002).
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT ALL DIAGNOSES BELONGING TO A PATIENT VIA
+PATIENT'S NAME.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select diagnoses.diagnosisID, patients.name as patientName, patients.patientID, staff.Name as doctorName, staff.staffID as doctorID, diagnoses.date, diagnoses.name as diagnosis, diagnoses.comments
+from diagnoses, staff, patients
+where patients.name="?" and diagnoses.patientID=patients.patientID and diagnoses.doctorID=staff.staffID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE ? IS ANY VALID PATIENT name (eg Bob White).
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+//PHARM_INVENTORY//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT ALL MEDICATIONS IN THE PHARM'S INVENTORY
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select pharm_inventory.medicationID, medications.name, pharm_inventory.amount
+from pharm_inventory, medications
+where pharm_inventory.medicationID=medications.medicationID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT A SPECIFIC MEDICATION IN THE PHARM'S INVENTORY
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select pharm_inventory.medicationID, medications.name, pharm_inventory.amount
+from pharm_inventory, medications
+where pharm_inventory.medicationID=? and pharm_inventory.medicationID=medications.medicationID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE ? IS ANY VALID medicationID (eg 1000).
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+//PRESCRIPTIONS THAT ARE NOT FULFILLED//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN SELECTIVE INFO ABOUT ALL PRESCRIPTIONS THAT ARE NOT FULFILLED. THIS
+IS FOR PHARMISISTS TO SEE ANY OUTSTANDING PRESCRIPTIONS THAT NEED
+TO BE FILLED.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select prescriptions.prescriptionID, medications.name as medication, prescriptions.medicationID, prescriptions.amount, patients.Name as patientName, patients.patientID, staff.Name as requesteeName, staff.staffID
+from prescriptions, medications, staff, patients
+where isnull(prescriptions.pharmisistID) and prescriptions.prescriptionID=medications.medicationID and prescriptions.patientID=patients.patientID and prescriptions.requesteeID=staff.staffID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =

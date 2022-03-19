@@ -1,0 +1,40 @@
+INCLUDED BELOW ARE QUERIES THAT EITHER ADD OR UPDATE TO A
+TABLE.
+!!!ALL QUERIES ARE EXAMPLES!!!
+
+//WRITE A NEW PRESCRIPTION//
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+INSERT INTO `Asclepius`.`prescriptions` (`medicationID`, `amount`, `instructions`, `patientID`, `requesteeID`, `timeWritten`) VALUES ('1000', '30', 'Take two every four hours as needed.', '1000', '1002', '2022-03-19 2:05:00');
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+requesteeID IS THE staffID OF THE NURSE OR DOCTOR WRITTING THE
+PRESCRIPTION
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+//PHARMISIST FULFILLING PRESCRIPTION//
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+UPDATE `Asclepius`.`prescriptions` SET `pharmisistID` = '1012', `timeFulfilled` = '2022-02-21 13:00:00' WHERE (`prescriptionID` = '1000');
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+DON'T FORGET TO ALTER THE AMOUNT OF THE PRESCRIPED DRUG IN THE
+PHARM_INVENTORY!
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+//ADJUSTING INVENTORY AMOUNT//
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+UPDATE `Asclepius`.`pharm_inventory` SET `amount` = '410' WHERE (`medicationID` = '1000');
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+THE NEW AMOUNT SHOULD BE CALCULATED
+(original amount) - (prescription amount) = (new amount)
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+//ADD AN NEW PATIENT//
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+INSERT INTO `Asclepius`.`patients` (`name`, `address`, `phone`) VALUES ('Kim Hann', '165 That St SW', '403-159-7532');
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+//ADD AN ASSIGNMENT//
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+INSERT INTO `Asclepius`.`assignments` (`patientID`, `careGiverID`, `adminID`) VALUES ('1002', '1003', '1004');
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE careGiverID IS THE staffID OF A NURSE OR DOCTOR AND adminID
+IS THE staffID IF THE SYSTEM ADMIN THAT MADE THE ASSIGNMENT
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
