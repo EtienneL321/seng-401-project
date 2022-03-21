@@ -10,6 +10,7 @@ import {
 import './App.css';
 import Login from './components/login/Login';
 import HomePage from './components/home/HomePage';
+import SignUp from './components/signup/SignUp';
 
 const USERS = [
   {
@@ -56,14 +57,11 @@ const App = () => {
 
   return (
     <Router>
-      <div className="App">
-        <header className="App-header">
-          <Routes>
-            <Route path="/" element={<Login logUser={loginHandler} auth={isUser}/>}/>
-            <Route path="/home" element={<HomePage/>} />
-          </Routes>
-        </header>
-      </div>
+      <Routes>
+        <Route path="/" element={<Login logUser={loginHandler} auth={isUser}/>}/>
+        <Route path="/home" element={<HomePage/>} />
+        <Route path="/signup" element={<SignUp/>} />
+      </Routes>
     </Router>
   );
 }

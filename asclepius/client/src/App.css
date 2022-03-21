@@ -13,16 +13,7 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+
 
 .App-link {
   color: #61dafb;
@@ -35,4 +26,47 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* For the Greeting banner at login and sign up */
+.banner-container {
+  width: 50vw;
+  background-image: linear-gradient(white, #1E90FF);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-container{
+  width: 50%;
+  color: white;
+}
+
+/* For the Nav Bar */
+.nav-bar-container {
+  /* flex-grow: 1; */
+}
+
+.app-title-nav {
+  flex-grow: 1;
+  text-align: left;
+  /* display: none; */
+}
+
+.pages-nav-navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.home-btn-nav {
+  color: white;
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.logout-btn-nav {
+  text-decoration: none;
+  /* margin-left: 5%; */
 }

@@ -7,45 +7,42 @@ import '../../App.css';
 import '../LoginSignup.css'
 
 
-const Login = (props) => {
-    const [enteredUsername, setEnteredUsername] = useState("");
-    const [enteredPassword, setEnteredPassword] = useState("");
+const SignUp = () => {
+    // Commented out, copied directly from login
 
-    const usernameChangeHandler = (event) => {
-        setEnteredUsername(event.target.value);
-    }
+    // const [enteredUsername, setEnteredUsername] = useState("");
+    // const [enteredPassword, setEnteredPassword] = useState("");
 
-    const passwordChangeHandler = (event) => {
-        setEnteredPassword(event.target.value);
-    }
+    // const usernameChangeHandler = (event) => {
+    //     setEnteredUsername(event.target.value);
+    // }
 
-    const loginHandler = () => {
-        // console.log("login");
-        // console.log(enteredUsername);
-        // console.log(enteredPassword);
-        let user = {
-            username: enteredUsername,
-            password: enteredPassword
-        }
-        props.logUser(user);
-        setEnteredUsername("");
-        setEnteredPassword("");
-        console.log(props.auth);
-    }
+    // const passwordChangeHandler = (event) => {
+    //     setEnteredPassword(event.target.value);
+    // }
+
+    // const loginHandler = () => {
+    //     let user = {
+    //         username: enteredUsername,
+    //         password: enteredPassword
+    //     }
+    //     props.logUser(user);
+    //     setEnteredUsername("");
+    //     setEnteredPassword("");
+    //     console.log(props.auth);
+    // }
 
     return (
         <div className='App'>
             <GreetingBanner />
             <div className='rightLoginContainer'>
                 <div className='loginDetialsContainer'>
-                    <h2>Login</h2>
+                    <h2>Signup</h2>
                     <div className="login-item">
                         <p>Username</p>
                         <div className='input-container'>
                             <Input 
                                 placeholder="Username" 
-                                value={enteredUsername} 
-                                onChange={usernameChangeHandler}
                             />
                         </div>
                     </div>
@@ -54,25 +51,30 @@ const Login = (props) => {
                         <div className='input-container'>
                             <Input 
                                 placeholder="Password" 
-                                value={enteredPassword}
                                 type="password"
-                                onChange={passwordChangeHandler}
                             />
                         </div>
-                        
-
                     </div>
-                    <Link onClick={loginHandler} to={props.auth ? ("/home") : ("/")}>
+                    <div className="login-item">
+                        <p>Confirm Password</p>
+                        <div className='input-container'>
+                            <Input 
+                                placeholder="Re-enter password" 
+                                type="password"
+                            />
+                        </div>
+                    </div>
+                    {/* <Link > */}
                         <Button variant="outlined" color="primary" >
-                            Login
+                            Sign Up
                         </Button>
-                    </Link>
+                    {/* </Link> */}
 
                     <div className='switch-sign-up-login-container'>
-                        <p>Need to Sign up?</p>
-                        <Link to='/signup'>
+                        <p>Already have an account?</p>
+                        <Link to='/'>
                             <Button variant="contained" color="primary" >
-                                Click here to Sign Up!
+                                Login
                             </Button>
                         </Link>
                     </div>
@@ -84,4 +86,4 @@ const Login = (props) => {
     )
 }
 
-export default Login;
+export default SignUp;
