@@ -7,10 +7,13 @@ import NavBar from '../UI/NavBar';
 import './HomePage.css';
 
 const HomePage = (props) => {
+
+    console.log(props.patients);
+
     return (
         <div className='MainApp'>
             <NavBar />
-            <h1>Main page</h1>
+            <h1>UNAUTHORIZED</h1>
         </div>
         
     )

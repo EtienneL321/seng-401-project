@@ -9,8 +9,14 @@ import {
 } from "react-router-dom";
 import './App.css';
 import Login from './components/login/Login';
-import HomePage from './components/home/HomePage';
 import SignUp from './components/signup/SignUp';
+import HomePage from './components/home/HomePage';
+import Doctor from './components/doctor/Doctor';
+import Nurse from './components/nurse/Nurse';
+import Pharmacist from './components/pharmacist/Pharmacist';
+import Administrator from './components/administrator/Administrator';
+import Layout from './components/Layout';
+import RequireAuth from './components/RequireAuth';
 
 const USERS = [
   {
@@ -28,39 +34,30 @@ const USERS = [
 ]
 
 const App = () => {
-
-  // Getting staff info based on username
-  useEffect(() => {
-    let data = { username: 'acai' };
-    Axios.get("http://localhost:3001/api/get/staff/info", {params: data}).then((response) => {
-      console.log(response);
-    });
-  }, []);
-
-  const [isUser, setIsUser] = useState(false);
-  const [userList, setUserList] = useState(USERS);
-
-  const loginHandler = (enteredUser) => {
-    for(let i of userList) {
-      console.log(i);
-      console.log(enteredUser);
-      if ((enteredUser.username === i.username) && (enteredUser.password === i.password)) {
-        setIsUser(true);
-        break;
-      } else {
-        setIsUser(false);
-      }
-    }
-
-    console.log(isUser);
-  }
-
+  
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login logUser={loginHandler} auth={isUser}/>}/>
-        <Route path="/home" element={<HomePage/>} />
-        <Route path="/signup" element={<SignUp/>} />
+        <Route path="/" element={<Layout />}>
+          {/* Public routes */}
+          <Route path="/login" element={<Login />}/>
+          <Route path="/signup" element={<SignUp/>} />
+          <Route path="/home" element={<HomePage />} />
+          {/* Protected routes */}
+          <Route element={<RequireAuth allowedRoles={['D']}/>}>
+            <Route path="/doctor" element={<Doctor/>} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={['N']}/>}>
+            <Route path="/nurse" element={<Nurse/>} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={['P']}/>}>
+            <Route path="/pharmacist" element={<Pharmacist/>} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={['A']}/>}>
+            <Route path="/administrator" element={<Administrator/>} />
+          </Route>
+
+        </Route>
       </Routes>
     </Router>
   );

@@ -24,7 +24,7 @@ const NavBar = () => {
                         <Button>Page 2</Button>
                         <Button>Page 3</Button>
                     </ButtonGroup>
-                    <Link to='/' className='logout-btn-nav'>
+                    <Link to='/login' className='logout-btn-nav'>
                         <Button variant="outlined" color="secondary">
                             Logout
                         </Button>

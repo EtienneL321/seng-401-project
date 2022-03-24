@@ -43,9 +43,19 @@ app.get("/api/get/staff", (req, res) => {
 // GET STAFF INFO BASED ON USERNAME
 app.get("/api/get/staff/info", (req, res) => {
     givenUsername = req.query.username;
-    console.log(givenUsername);
     const sqlSelect = `select staff.staffID, staff.username, staff.password, staff.Name, staff.Phone, staff.Address, staff.ContactNumber, staff.staffType, staff.clearanceLevel from staff where staff.username=?`;
     db.query(sqlSelect, [givenUsername], (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        res.send(result);
+    });
+});
+
+// GET STAFF ASSIGNMENTS BASED ON STAFF ID
+app.get("/api/get/staff/assignments/id", (req, res) => {
+    givenID = req.query.staffID;
+    const sqlSelect = `select careGiver.Name as careGiverName, careGiver.staffID as careGiverID, patients.Name as patientName, patients.patientID, assigner.Name as assignerName, assigner.staffID as assignerID from staff as careGiver, staff as assigner, patients, assignments where careGiver.staffID=? and assignments.patientID=patients.patientID and assignments.careGiverID=careGiver.staffID and assignments.adminID=assigner.staffID`;
+    db.query(sqlSelect, [givenID], (err, result) => {
         if (err) throw err;
         console.log(result);
         res.send(result);
@@ -55,10 +65,11 @@ app.get("/api/get/staff/info", (req, res) => {
 // GET PASSWORD BASED ON STAFF USERNAME
 app.get("/api/get/staff/password", (req, res) => {
     givenUsername = req.query.username;
-    const sqlSelect = "SELECT staff.password FROM staff WHERE staff.username=?";
-    db.query(sqlSelect , [givenUsername], (err, result) => {
+    givenPassword = req.query.password;
+    const sqlSelect = "SELECT * FROM staff WHERE staff.username=? and staff.password=?";
+    db.query(sqlSelect , [givenUsername, givenPassword], (err, result) => {
         if(err) throw err;
-        // console.log(result);
+        console.log(result);
         res.send(result);
     });
 });
@@ -77,10 +88,11 @@ app.get("/api/get/patients", (req, res) => {
 // GAIN INFO ABOUT THE PATIENT BASED ON ID
 app.get("/api/get/patients/info", (req, res) => {
     givenID = req.query.patientID;
+    console.log("THIS IS DATA FROM FRONT END", givenID);
     const sqlSelect = "select patients.patientID, patients.name, patients.address, patients.phone from patients where patients.patientID=?";
     db.query(sqlSelect, [givenID], (err, result) => {
         if (err) throw err;
-        //console.log(result);
+        console.log(result);
         res.send(result);
     });
 });
@@ -102,7 +114,7 @@ app.get("/api/get/medications/info/id", (req, res) => {
     const sqlSelect = "select medications.medicationID, medications.name, medications.use, medications.warnings from medications where medications.medicationID=?";
     db.query(sqlSelect, [givenID], (err, result) => {
         if (err) throw err;
-        //console.log(result);
+        console.log(result);
         res.send(result);
     });
 });
