@@ -51,6 +51,17 @@ app.get("/api/get/staff/info", (req, res) => {
     });
 });
 
+// GET STAFF INFO BASED ON STAFF ID
+app.get("/api/get/staff/info/id", (req, res) => {
+    givenID = req.query.staffID;
+    const sqlSelect = `select staff.staffID, staff.username, staff.Name, staff.Phone, staff.Address, staff.ContactNumber, staff.staffType, staff.clearanceLevel from staff where staff.staffID=?`;
+    db.query(sqlSelect, [givenID], (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        res.send(result);
+    });
+});
+
 // GET STAFF ASSIGNMENTS BASED ON STAFF ID
 app.get("/api/get/staff/assignments/id", (req, res) => {
     givenID = req.query.staffID;

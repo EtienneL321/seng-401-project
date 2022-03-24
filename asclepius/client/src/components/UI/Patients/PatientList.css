@@ -1,0 +1,14 @@
+.patient-list-container {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    width: 70%;
+    height: 80%;
+    margin: 0 auto;
+}
+
+.patientItem {
+    display: flex;
+    border: 1px solid black;
+    margin: 2%;
+}
