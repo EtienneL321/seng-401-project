@@ -1,0 +1,48 @@
+.App {
+  /* background-color: aqua; */
+  /* background-color: #282c34; */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  /* align-items: center;
+    justify-content: center; */
+  font-size: calc(10px + 2vmin);
+  /* color: white; */
+}
+
+.rightLoginContainer {
+  width: 50vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.loginDetialsContainer {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-item {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  gap: 10px;
+  padding: 6%;
+}
+
+.login-item > p {
+  font-size: 20px;
+  margin: 0;
+}
+
+.switch-sign-up-login-container {
+  padding-bottom: 10%;
+}
+
+.switch-sign-up-login-container > p {
+  font-size: 20px;
+}

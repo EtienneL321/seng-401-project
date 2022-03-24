@@ -1,0 +1,160 @@
+INCLUDED BELOW ARE RELATIONAL QUERIES THAT CONTAIN MULTIPLE
+TABLES.
+REPLACE ? WITH DESIRED SEARCH CRITERIA.
+CHARACTERS/STRINGS NEED TO BE CONTAINED WITHIN "".
+EX: where staff.username="Lpjj" and staff.password="chocolate"
+
+//ALL ASSIGNMENTS//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN SELECTED INFO ABOUT ALL STAFF MEMBERS ASSIGNED TO ANY PATIENT.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select patients.Name as patientName, patients.patientID, careGiver.Name as careGiverName, careGiver.staffID as careGiverID, assigner.Name as assignerName, assigner.staffID as assignerID
+from staff as careGiver, staff as assigner, patients, assignments
+where assignments.patientID=patients.patientID and assignments.careGiverID=careGiver.staffID and assignments.adminID=assigner.staffID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
+//ALL ASSIGNMENTS FOR A PATIENT//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN SELECTED INFO ABOUT ALL STAFF MEMBERS ASSIGNED TO A PATIENT
+VIA PATIENT'S ID NUMBER.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select patients.Name as patientName, patients.patientID, careGiver.Name as careGiverName, careGiver.staffID as careGiverID, assigner.Name as assignerName, assigner.staffID as assignerID
+from staff as careGiver, staff as assigner, patients, assignments
+where patients.patientID=? and assignments.patientID=patients.patientID and assignments.careGiverID=careGiver.staffID and assignments.adminID=assigner.staffID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE ? IS ANY VALID patientID (eg 1000).
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN SELCTED INFO ABOUT ALL STAFF MEMBERS ASSIGNED TO A PATIENT
+VIA PATIENT'S NAME.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select patients.Name as patientName, patients.patientID, careGiver.Name as careGiverName, careGiver.staffID as careGiverID, assigner.Name as assignerName, assigner.staffID as assignerID
+from staff as careGiver, staff as assigner, patients, assignments
+where patients.Name="?" and assignments.patientID=patients.patientID and assignments.careGiverID=careGiver.staffID and assignments.adminID=assigner.staffID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE ? IS ANY VALID Name (eg Yani Cho).
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+//ALL ASSIGNMENTS FOR A NURSE OR DOCTOR//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN SELECTED INFO ABOUT ALL PATIENTS ASSIGNED TO A NURSE OR DOCTOR
+VIA THEIR STAFF ID NUMBER.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select careGiver.Name as careGiverName, careGiver.staffID as careGiverID, patients.Name as patientName, patients.patientID, assigner.Name as assignerName, assigner.staffID as assignerID
+from staff as careGiver, staff as assigner, patients, assignments
+where careGiver.staffID=? and assignments.patientID=patients.patientID and assignments.careGiverID=careGiver.staffID and assignments.adminID=assigner.staffID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE ? IS ANY VALID staffID (eg 1001).
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN SELCTED INFO ABOUT ALL PATIENTS ASSIGNED TO A NURSE OR DOCTOR
+VIA THEIR NAME.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select careGiver.Name as careGiverName, careGiver.staffID as careGiverID, patients.Name as patientName, patients.patientID, assigner.Name as assignerName, assigner.staffID as assignerID
+from staff as careGiver, staff as assigner, patients, assignments
+where careGiver.Name="?" and assignments.patientID=patients.patientID and assignments.careGiverID=careGiver.staffID and assignments.adminID=assigner.staffID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE ? IS ANY VALID NURES OR DOCTOR Name (eg Destiny Lee).
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+//ALL PATIENTS PRESCRIPTIONS//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT ALL PRESCRIPTIONS BELONGING TO A PATIENT VIA
+PATIENT'S ID NUMBER.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select patients.Name as patientName, patients.patientID, medications.name as medicationName, prescriptions.amount, prescriptions.instructions, careGiver.Name as careGiverName, careGiver.staffID as careGiverID, prescriptions.timeWritten, prescriptions.pharmisistID, prescriptions.timeFulfilled, prescriptions.receiverID, prescriptions.timeReceived
+from prescriptions, patients, medications, staff as careGiver
+where prescriptions.patientID=? and patients.patientID=prescriptions.patientID and prescriptions.requesteeID=careGiver.staffID and prescriptions.medicationID=medications.medicationID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE ? IS ANY VALID patientID (eg 1002).
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT ALL PRESCRIPTIONS BELONGING TO A PATIENT VIA
+PATIENT'S NAME.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select patients.Name as patientName, patients.patientID, medications.name as medicationName, prescriptions.amount, prescriptions.instructions, careGiver.Name as careGiverName, careGiver.staffID as careGiverID, prescriptions.timeWritten, prescriptions.pharmisistID, prescriptions.timeFulfilled, prescriptions.receiverID, prescriptions.timeReceived
+from prescriptions, patients, medications, staff as careGiver
+where patients.name="?" and prescriptions.patientID=patients.patientID and patients.patientID=prescriptions.patientID and prescriptions.requesteeID=careGiver.staffID and prescriptions.medicationID=medications.medicationID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE ? IS ANY VALID PATIENT name (eg Daniel Hicks).
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+//ALL PATIENTS MEDICAL NOTES//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT ALL MEDICAL NOTES BELONGING TO A PATIENT VIA
+PATIENT'S ID NUMBER.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select medical_notes.noteID, patients.name as patientName, patients.patientID, staff.Name as authorName, staff.staffID as authorID, medical_notes.dateTime, medical_notes.contents
+from medical_notes, staff, patients
+where medical_notes.patientID=? and medical_notes.patientID=patients.patientID and medical_notes.careGiverID=staff.staffID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE ? IS ANY VALID patientID (eg 1002).
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT ALL MEDICAL NOTES BELONGING TO A PATIENT VIA
+PATIENT'S NAME.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select medical_notes.noteID, patients.name as patientName, patients.patientID, staff.Name as authorName, staff.staffID as authorID, medical_notes.dateTime, medical_notes.contents
+from medical_notes, staff, patients
+where patients.name="?" and medical_notes.patientID=patients.patientID and medical_notes.careGiverID=staff.staffID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE ? IS ANY VALID PATIENT name (eg Bob White).
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+//ALL PATIENTS DIAGNOSES//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT ALL DIAGNOSES BELONGING TO A PATIENT VIA
+PATIENT'S ID NUMBER.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select diagnoses.diagnosisID, patients.name as patientName, patients.patientID, staff.Name as doctorName, staff.staffID as doctorID, diagnoses.date, diagnoses.name as diagnosis, diagnoses.comments
+from diagnoses, staff, patients
+where patients.patientID=? and diagnoses.patientID=patients.patientID and diagnoses.doctorID=staff.staffID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE ? IS ANY VALID patientID (eg 1002).
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT ALL DIAGNOSES BELONGING TO A PATIENT VIA
+PATIENT'S NAME.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select diagnoses.diagnosisID, patients.name as patientName, patients.patientID, staff.Name as doctorName, staff.staffID as doctorID, diagnoses.date, diagnoses.name as diagnosis, diagnoses.comments
+from diagnoses, staff, patients
+where patients.name="?" and diagnoses.patientID=patients.patientID and diagnoses.doctorID=staff.staffID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE ? IS ANY VALID PATIENT name (eg Bob White).
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+//PHARM_INVENTORY//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT ALL MEDICATIONS IN THE PHARM'S INVENTORY
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select pharm_inventory.medicationID, medications.name, pharm_inventory.amount
+from pharm_inventory, medications
+where pharm_inventory.medicationID=medications.medicationID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN ALL INFO ABOUT A SPECIFIC MEDICATION IN THE PHARM'S INVENTORY
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select pharm_inventory.medicationID, medications.name, pharm_inventory.amount
+from pharm_inventory, medications
+where pharm_inventory.medicationID=? and pharm_inventory.medicationID=medications.medicationID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+WHERE ? IS ANY VALID medicationID (eg 1000).
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+//PRESCRIPTIONS THAT ARE NOT FULFILLED//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN SELECTIVE INFO ABOUT ALL PRESCRIPTIONS THAT ARE NOT FULFILLED. THIS
+IS FOR PHARMISISTS TO SEE ANY OUTSTANDING PRESCRIPTIONS THAT NEED
+TO BE FILLED.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select prescriptions.prescriptionID, medications.name as medication, prescriptions.medicationID, prescriptions.amount, patients.Name as patientName, patients.patientID, staff.Name as requesteeName, staff.staffID
+from prescriptions, medications, staff, patients
+where isnull(prescriptions.pharmisistID) and prescriptions.prescriptionID=medications.medicationID and prescriptions.patientID=patients.patientID and prescriptions.requesteeID=staff.staffID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
