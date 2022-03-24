@@ -1,5 +1,5 @@
 .main-content-container {
-    height: 100vh;
+    height: 94vh;
     display: flex;
     flex-direction: row;
 }
@@ -16,6 +16,7 @@
 .main-page-content {
     width: 70%;
     height: 100%;
+    text-align: center;
 }
 
 .navigation-btns-user {
