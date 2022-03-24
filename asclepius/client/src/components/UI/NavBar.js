@@ -19,11 +19,11 @@ const NavBar = () => {
                     </Link>
                 </Typography>
                 <div className='pages-nav-navbar'>
-                    <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
+                    {/* <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
                         <Button>Page 1</Button>
                         <Button>Page 2</Button>
                         <Button>Page 3</Button>
-                    </ButtonGroup>
+                    </ButtonGroup> */}
                     <Link to='/login' className='logout-btn-nav'>
                         <Button variant="outlined" color="secondary">
                             Logout

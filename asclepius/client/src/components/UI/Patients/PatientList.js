@@ -1,7 +1,7 @@
 import React from 'react';
 import './PatientList.css';
 
-const PatiientList = (props) => {
+const PatientList = (props) => {
     const assignedPatientsInfo = props.assignedPatientsInfo;
 
     return (
@@ -23,5 +23,5 @@ const PatiientList = (props) => {
     );
 };
 
-export default PatiientList;
+export default PatientList;
 

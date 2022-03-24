@@ -13,6 +13,16 @@ const Doctor = (props) => {
     const [staffInfo, setStaffInfo] = useState({});
     const [assignedPatientsInfo, setAssignedPatientsInfo] = useState([]);
 
+    const [selectedPatient, setSelectedPatient] = useState(null);
+    let mainComponentState = "patientListView";
+
+    function MainComponentRender(props){
+        const compState = props.compState;
+        if(compState === "patientListView"){
+            return <PatientList assignedPatientsInfo={assignedPatientsInfo}/>
+        }
+    }
+
     useEffect(() => {
         const fetchStaffAndPatients = async () => {
             let staff = {
@@ -32,14 +42,14 @@ const Doctor = (props) => {
             }
         };
         fetchStaffAndPatients();
-    }, [auth])
+    }, [auth]);
 
     return (
         <div className='MainApp'>
             <NavBar />
             <div className='main-content-container'>
                 <div className='user-sidebar'>
-                    <h3>Hello, {staffInfo.Name}</h3>
+                    <h3>Hello, Doctor {staffInfo.Name}</h3>
                     <div className='navigation-btns-user'>
                         <button type="button" className='nav-btns'>
                             View Patients
@@ -52,7 +62,8 @@ const Doctor = (props) => {
                 </div>
                 
                 <div className='main-page-content'>
-                    <PatientList assignedPatientsInfo={assignedPatientsInfo}/>
+                    <MainComponentRender compState={mainComponentState} />
+                    {/* <PatientList assignedPatientsInfo={assignedPatientsInfo}/> */}
                 </div>
             </div>
         </div>

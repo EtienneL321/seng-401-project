@@ -5,7 +5,7 @@ import useAuth from '../../hooks/useAuth';
 import '../home/HomePage.css';
 import '../CommonUser.css';
 
-const Doctor = (props) => {
+const Nurse = (props) => {
     // console.log(props.patients);
     
     const { auth } = useAuth();
@@ -39,7 +39,7 @@ const Doctor = (props) => {
             <NavBar />
             <div className='main-content-container'>
                 <div className='user-sidebar'>
-                    <h3>Hello, {staffInfo.Name}</h3>
+                    <h3>Hello, Nurse {staffInfo.Name}</h3>
                     <div className='navigation-btns-user'>
                         <button type="button" className='nav-btns'>
                             View Patients
@@ -60,4 +60,4 @@ const Doctor = (props) => {
     )
 }
 
-export default Doctor;
+export default Nurse;
