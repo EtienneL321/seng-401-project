@@ -158,3 +158,15 @@ select prescriptions.prescriptionID, medications.name as medication, prescriptio
 from prescriptions, medications, staff, patients
 where isnull(prescriptions.pharmisistID) and prescriptions.prescriptionID=medications.medicationID and prescriptions.patientID=patients.patientID and prescriptions.requesteeID=staff.staffID
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
+//PRESCRIPTIONS THAT ARE READY FOR PICKUP//
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+GAIN SELECTIVE INFO ABOUT ALL PRESCRIPTIONS THAT ARE FULFILLED. THIS
+IS FOR NURSES OR DOCTORS TO SEE ANY PRESECRIPTIONS READY FOR PICK UP.
+ANY DOCTOR OR NURSE SHOULD BE ABLE TO PICK UP A PRESCRIPTION.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+select prescriptions.prescriptionID, medications.name as medication, prescriptions.medicationID, prescriptions.amount, patients.Name as patientName, patients.patientID, requestee.Name as requesteeName, requestee.staffID as requesteeID, pharmisist.Name as pharmisistName, pharmisist.staffID as pharmisistID
+from prescriptions, medications, staff as requestee, staff as pharmisist, patients
+where isnull(prescriptions.receiverID) and not isnull(prescriptions.pharmisistID) and prescriptions.prescriptionID=medications.medicationID and prescriptions.patientID=patients.patientID and prescriptions.requesteeID=requestee.staffID and prescriptions.pharmisistID=pharmisist.staffID
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
