@@ -97,7 +97,7 @@ const Login = (props) => {
                 />
               </div>
             </div>
-            <Button type="submit" variant="outlined" color="primary">
+            <Button type="submit" variant="outlined" color="primary" style={{ border: '2px solid #1E90FF', color: '#1E90FF'}}>
               Login
             </Button>
             <div>

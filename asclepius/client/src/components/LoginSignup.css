@@ -10,6 +10,20 @@
   /* color: white; */
 }
 
+/* For the Greeting banner at login and sign up */
+.banner-container {
+  width: 50vw;
+  background-image: linear-gradient(white, #1E90FF);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-container{
+  width: 50%;
+  color: white;
+}
+
 .rightLoginContainer {
   width: 50vw;
   display: flex;
@@ -26,6 +40,11 @@
   flex-direction: column;
 }
 
+.login-button {
+  color:white;
+  
+}
+
 .login-item {
   display: flex;
   flex-direction: column;
@@ -38,6 +57,7 @@
   font-size: 20px;
   margin: 0;
 }
+
 
 .switch-sign-up-login-container {
   padding-bottom: 10%;

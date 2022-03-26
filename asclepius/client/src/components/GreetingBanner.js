@@ -1,4 +1,4 @@
-import '../App.css';
+import './LoginSignup.css';
 
 const GreetingBanner = () => {
     return (

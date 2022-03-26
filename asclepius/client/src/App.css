@@ -28,20 +28,6 @@
   }
 }
 
-/* For the Greeting banner at login and sign up */
-.banner-container {
-  width: 50vw;
-  background-image: linear-gradient(white, #1E90FF);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.title-container{
-  width: 50%;
-  color: white;
-}
-
 /* For the Nav Bar */
 .nav-bar-container {
   /* flex-grow: 1; */
