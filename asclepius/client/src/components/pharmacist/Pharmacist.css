@@ -1,0 +1,32 @@
+.order-list-container {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    width: 70%;
+    height: 80%;
+    margin: 0 auto;
+}
+
+.order-item {
+    display: flex;
+    border: 1px solid black;
+    margin: 2%;
+}
+
+.order-item > p {
+    font-size: 15px;
+} 
+
+.fulfill-form-container {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+
+}
+.fulfill-btn {
+    width: 130px;
+    font-size: 15px;
+    margin: 0 auto;
+}

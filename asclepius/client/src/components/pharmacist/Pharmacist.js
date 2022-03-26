@@ -4,14 +4,97 @@ import NavBar from '../UI/NavBar';
 import useAuth from '../../hooks/useAuth';
 import '../home/HomePage.css';
 import '../CommonUser.css';
+import OrderList from './OrderList';
+import InventoryList from './InventoryList';
+import FulfillOrder from './FulfillOrder';
+import MakeOrder from './MakeOrder';
+// import { is } from 'express/lib/request';
 
 const Pharmacist = (props) => {
     // console.log(props.patients);
     
     const { auth } = useAuth();
     const [staffInfo, setStaffInfo] = useState({});
-    const [assignedPatientsInfo, setAssignedPatientsInfo] = useState([]);
+    const [orders, setOrders] = useState([]);
+    const [ordersFlag, setOrdersFlag] = useState(false);
+    const [inventory, setInventory] = useState([]);
     // console.log(auth);
+
+    const [selectedOrder, setSelectedOrder] = useState(null);
+    const [mainComponentState, setMainComponentState] = useState("ordersView");
+
+    function showOrders(){
+        setMainComponentState("ordersView");
+    }
+    function showInventory(){
+        setMainComponentState("inventoryView");
+    }
+
+    function showFulfillOrder(order){
+        setSelectedOrder(order);
+        setMainComponentState("fulfillOrder");
+    }
+
+    function showMakeOrder(){
+        setMainComponentState("makeOrderView");
+    }
+
+    const handleMakeOrder = async (medicationID, amount) => {
+
+    };
+
+    const handleFulfillOrder = async (order) => {
+        let date = new Date();
+        // let currTime = "";
+        let currTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate()+ " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+        let prescriptionParams = {
+            pharmasistID : staffInfo.staffID,
+            time: currTime,
+            prescriptionID: order.prescriptionID,
+        };
+
+        const medicationInvolved = inventory.find(({medicationID}) => medicationID === order.medicationID);
+        const newMedAmount = medicationInvolved.amount - order.amount;
+        if(newMedAmount < 0) {
+            //error
+            alert("Not enough medicine in inventory");
+        }
+        else{
+            // update the prescription
+            await axios.put("http://localhost:3001/api/put/prescriptions/info", prescriptionParams);
+
+            // decrement the medication in the inventory
+            let inventoryParams = {
+                amount: newMedAmount,
+                medicationID: order.medicationID,
+            };
+            await axios.put("http://localhost:3001/api/put/inventory/info", inventoryParams);
+
+            //alert that the change has been made
+            alert("Order has been fulfilled!");
+            setOrdersFlag(prev => !prev);
+            // return to orders page
+            showOrders();
+        }
+    };
+
+    function MainComponentRender(props){
+        const compState = props.compState;
+        if(compState === "ordersView"){
+            return <OrderList showFulfillOrder={showFulfillOrder} setOrders={setOrders} ordersInfo={orders}/>;
+        }
+        else if (compState === "inventoryView"){
+            return <InventoryList inventoryInfo={inventory}/>;
+        }
+        else if(compState === "fulfillOrder"){
+            // const orderToFulfill = orders.find(({prescriptionID}) => prescriptionID === selectedOrder.prescriptionID);
+            return <FulfillOrder order={selectedOrder} inventoryInfo={inventory} handleFulfillOrder={handleFulfillOrder}/>
+        }
+        else if(compState === "makeOrderView"){
+            return <MakeOrder />
+        }
+    }
 
     useEffect(() => {
         const fetchStaffAndPatients = async () => {
@@ -23,16 +106,22 @@ const Pharmacist = (props) => {
                 console.log("Response for the staff data", staffData.data[0]);
                 setStaffInfo(staffData.data[0]);
 
-                const assignedPatients = await axios.get('http://localhost:3001/api/get/staff/assignments/id', {params: staff});
-                console.log("Response for the patients data", assignedPatients.data);
-                setAssignedPatientsInfo(assignedPatients.data);
+                const orderData = await axios.get('http://localhost:3001/api/get/prescriptions/orders');
+                console.log("Response for the order data", orderData.data);
+                setOrders(orderData.data);
+                // setMainComponentState("ordersView");
+
+                const inventoryData = await axios.get('http://localhost:3001/api/get/inventory');
+                console.log("Response for inventory", inventoryData.data);
+                setInventory(inventoryData.data);
+                // setInventory
             }
             catch (error){
                 console.error(error);
             }
         };
         fetchStaffAndPatients();
-    }, [auth])
+    }, [auth, setMainComponentState, setInventory, setOrders, ordersFlag]);
 
     return (
         <div className='MainApp'>
@@ -41,13 +130,13 @@ const Pharmacist = (props) => {
                 <div className='user-sidebar'>
                     <h3>Hello, Pharmacist {staffInfo.Name}</h3>
                     <div className='navigation-btns-user'>
-                        <button type="button" className='nav-btns'>
+                        <button type="button" className='nav-btns' onClick={showOrders}>
                             View Orders
                         </button>
-                        <button type="button" className='nav-btns'>
+                        <button type="button" className='nav-btns' onClick={showInventory}>
                             View Inventory
                         </button>
-                        <button type="button" className='nav-btns'>
+                        <button type="button" className='nav-btns' onClick={showMakeOrder}>
                             Make Order
                         </button>
                         
@@ -55,7 +144,7 @@ const Pharmacist = (props) => {
                 </div>
                 
                 <div className='main-page-content'>
-                    <h1>Pharmacist Page</h1>
+                    <MainComponentRender compState={mainComponentState} />
                 </div>
             </div>
         </div>
