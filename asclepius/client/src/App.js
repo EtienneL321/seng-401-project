@@ -45,7 +45,7 @@ const App = () => {
           <Route element={<RequireAuth allowedRoles={["N"]} />}>
             <Route path="/nurse" element={<Nurse />} />
           </Route>
-          <Route element={<RequireAuth allowedRoles={["P","A"]} />}>
+          <Route element={<RequireAuth allowedRoles={["P"]} />}>
             <Route path="/pharmacist" element={<Pharmacist />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={["A"]} />}>

@@ -12,6 +12,7 @@ import AddPatient from '../UI/AddPatient/AddPatient';
 import RemovePatient from '../UI/RemovePatient/RemovePatient';
 import Error from '../UI/Messages/Error';
 import Success from '../UI/Messages/Success';
+import InventoryList from '../pharmacist/InventoryList';
 
 const Administrator = (props) => {
 
@@ -20,6 +21,7 @@ const Administrator = (props) => {
     const [allPatients, setAllPatients] = useState([]);
     const [allDoctors, setAllDoctors] = useState([]);
     const [allNurses, setAllNurses] = useState([]);
+    const [inventory, setInventory] = useState([]);
     const [addRemoveState, setAddRemoveState] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
@@ -30,9 +32,9 @@ const Administrator = (props) => {
         const compState = props.compState;
         if(compState === "patientListView"){
             return <PatientList title={"All patients"} assignedPatientsInfo={allPatients}/>
-        }
-
-        if(compState === "addRemovePatient"){
+        }else if (compState === "inventoryView"){
+            return <InventoryList inventoryInfo={inventory}/>;
+        }else if(compState === "addRemovePatient"){
             return (
                 <div>
                     <h1>Add/Remove Patient</h1>
@@ -54,9 +56,7 @@ const Administrator = (props) => {
                         :<RemovePatient removePatient={removePatient} patients={allPatients}/>}
                 </div>
             );
-        }
-
-        if(compState === "assignStaff"){
+        }else if(compState === "assignStaff"){
             return errorMessage ? <Error handleError={handleError}>{errorMessage}</Error>  : successMessage ? <Success handleSuccess={handleSuccess}>{successMessage}</Success> : 
             (<AssignForm getAssignments={makeAssignment} doctors={allDoctors} nurses={allNurses} patients={allPatients} self={staffInfo}/>);
         }
@@ -93,6 +93,10 @@ const Administrator = (props) => {
                 const allPatients = await axios.get('http://localhost:3001/api/get/patients');
                 // console.log("Response for the patients data", allPatients.data);
                 setAllPatients(allPatients.data);
+
+                const inventoryData = await axios.get('http://localhost:3001/api/get/inventory');
+                // console.log("Response for inventory", inventoryData.data);
+                setInventory(inventoryData.data);
             }
             catch (error){
                 console.error(error);
@@ -153,11 +157,9 @@ const Administrator = (props) => {
                         <button type="button" onClick={() => {setMainComonentState("assignStaff");}} className='nav-btns'>
                             Assign Staff to Patients
                         </button>
-                        <Link to='/pharmacist'>
-                            <button type="button" className='nav-btns'>
-                                Pharmacist Page
-                            </button>
-                        </Link>
+                        <button type="button" onClick={() => {setMainComonentState("inventoryView");}} className='nav-btns'>
+                            View Pharmacy Inventory
+                        </button>
                     </div>
                 </div>
                 <div className='main-page-content'>
