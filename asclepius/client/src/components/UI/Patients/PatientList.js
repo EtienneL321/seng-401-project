@@ -6,7 +6,7 @@ const PatientList = (props) => {
 
     return (
         <div>
-            <h1>Assigned Patients</h1>
+            <h1>{props.title ? props.title : "Assigned Patients"}</h1>
             <div className='patient-list-container'>
                 {assignedPatientsInfo
                 .map((patient) => {
