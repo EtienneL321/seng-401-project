@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import useAuth from "../../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
@@ -8,19 +9,24 @@ import "../LoginSignup.css";
 
 const SignUp = () => {
   const ROUTES = {
-    1: "/doctor",
-    2: "/nurse",
-    3: "/pharmacist",
-    0: "/administrator",
+    1: ["D", "/doctor"],
+    2: ["N", "/nurse"],
+    3: ["P", "/pharmacist"],
+    0: ["A", "/administrator"],
   };
 
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
+
+  const count = useRef(Math.floor(Math.random() * 100000));
 
   const [enteredUsername, setEnteredUsername] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [secondaryPassword, setSecondaryPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [hospitalKey, setHospitalKey] = useState("");
+
+  
 
   /*
    * When values are reset, useEffect is triggered and removes the
@@ -46,7 +52,7 @@ const SignUp = () => {
     setErrorMessage("");
 
     try {
-      if (enteredPassword != secondaryPassword) {
+      if (enteredPassword !== secondaryPassword) {
         console.log("Password does not match");
         setErrorMessage("Password does not match");
         reset();
@@ -65,8 +71,17 @@ const SignUp = () => {
         return;
       }
       console.log("New user added to database");
-      /* Still need to add authentication */
-      navigate(ROUTES[hospitalKey.slice(2, 3)], { replace: true });
+      const type = [ROUTES[hospitalKey.slice(2, 3)][0]];
+      const id = count.current;
+      const clearanceLevel = "3";
+
+      /* 
+      * Need to add new user to database 
+      * Need to add Name, Phone, Address, and ContactNumber parameters
+      * Could design hospital key to give a specific staffID and clearance level
+      */
+      setAuth({ id, type, clearanceLevel });
+      navigate(ROUTES[hospitalKey.slice(2, 3)][1], { replace: true });
     } catch (error) {
       setErrorMessage("There was an error");
     }

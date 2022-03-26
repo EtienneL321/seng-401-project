@@ -59,6 +59,7 @@ const Login = (props) => {
       const id = response?.data[0]?.staffID;
       const type = [response?.data[0]?.staffType];
       const clearanceLevel = response?.data[0]?.clearanceLevel;
+
       setAuth({ id, type, clearanceLevel });
       navigate(ROUTES[type], { replace: true });
     } catch (error) {
