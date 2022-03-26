@@ -255,6 +255,49 @@ app.get("/api/get/prescriptions/info", (req, res) => {
     });
 });
 
+// PRESCRIPTIONS THAT ARE NOT FULFILLED (ORDERS)
+app.get("/api/get/prescriptions/orders", (req, res) => {
+    const sqlSelect = "select prescriptions.prescriptionID, medications.name as medication, prescriptions.medicationID, prescriptions.amount, patients.Name as patientName, patients.patientID, staff.Name as requesteeName, staff.staffID from prescriptions, medications, staff, patients where isnull(prescriptions.pharmisistID) and prescriptions.medicationID=medications.medicationID and prescriptions.patientID=patients.patientID and prescriptions.requesteeID=staff.staffID"
+    db.query(sqlSelect, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+// FULFILL PATIENT ORDER ON PRESCRIPTION
+app.put("/api/put/prescriptions/info", (req, res) => {
+    givenPharmID = req.body.pharmasistID;
+    givenTime = req.body.time;
+    givenPrescID = req.body.prescriptionID;
+    const sqlSelect = "UPDATE `Asclepius`.`prescriptions` SET `pharmisistID` = ?, `timeFulfilled` = ? WHERE (`prescriptionID` = ?);"
+    db.query(sqlSelect, [givenPharmID, givenTime, givenPrescID], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+
+// INVENTORY
+// GET ALL INVENTORY ITEMS
+app.get("/api/get/inventory", (req, res) => {
+    const sqlSelect = "select pharm_inventory.medicationID, medications.name, pharm_inventory.amount from pharm_inventory, medications where pharm_inventory.medicationID=medications.medicationID";
+    db.query(sqlSelect, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+// ADJUSTING INVENTORY AMOUNT
+app.put("/api/put/inventory/info", (req, res) => {
+    givenAmount = req.body.amount;
+    givenMedID = req.body.medicationID;
+    const sqlSelect = "UPDATE `Asclepius`.`pharm_inventory` SET `amount` = ? WHERE (`medicationID` = ?)";
+    db.query(sqlSelect, [givenAmount, givenMedID], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
 
 
 
