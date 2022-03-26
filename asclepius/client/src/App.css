@@ -46,7 +46,7 @@
 }
 
 .home-btn-nav {
-  color: white;
+  color: #ffffff;
   text-decoration: none;
   font-size: 25px;
   font-weight: bold;
@@ -54,5 +54,7 @@
 
 .logout-btn-nav {
   text-decoration: none;
+  color: white;
   /* margin-left: 5%; */
+
 }

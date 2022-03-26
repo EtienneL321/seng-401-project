@@ -13,6 +13,21 @@ import Pharmacist from "./components/pharmacist/Pharmacist";
 import Administrator from "./components/administrator/Administrator";
 import Layout from "./components/Layout";
 import RequireAuth from "./components/RequireAuth";
+import { createTheme, ThemeProvider } from "@material-ui/core";
+
+const theme = createTheme ({
+  palette:{
+    type: 'light',
+    primary: {
+      main: '#1e90ff',
+      dark: '#b21547',
+    },
+    secondary:{
+      main: '#ffffff'
+    }
+
+  },
+});
 
 const USERS = [
   {
@@ -31,29 +46,31 @@ const USERS = [
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          {/* Public routes */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/" element={<HomePage />} />
-          {/* Protected routes */}
-          <Route element={<RequireAuth allowedRoles={["D"]} />}>
-            <Route path="/doctor" element={<Doctor />} />
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            {/* Public routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/" element={<HomePage />} />
+            {/* Protected routes */}
+            <Route element={<RequireAuth allowedRoles={["D"]} />}>
+              <Route path="/doctor" element={<Doctor />} />
+            </Route>
+            <Route element={<RequireAuth allowedRoles={["N"]} />}>
+              <Route path="/nurse" element={<Nurse />} />
+            </Route>
+            <Route element={<RequireAuth allowedRoles={["P"]} />}>
+              <Route path="/pharmacist" element={<Pharmacist />} />
+            </Route>
+            <Route element={<RequireAuth allowedRoles={["A"]} />}>
+              <Route path="/administrator" element={<Administrator />} />
+            </Route>
           </Route>
-          <Route element={<RequireAuth allowedRoles={["N"]} />}>
-            <Route path="/nurse" element={<Nurse />} />
-          </Route>
-          <Route element={<RequireAuth allowedRoles={["P"]} />}>
-            <Route path="/pharmacist" element={<Pharmacist />} />
-          </Route>
-          <Route element={<RequireAuth allowedRoles={["A"]} />}>
-            <Route path="/administrator" element={<Administrator />} />
-          </Route>
-        </Route>
-      </Routes>
-    </Router>
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 };
 

@@ -40,10 +40,6 @@
   flex-direction: column;
 }
 
-.login-button {
-  color:white;
-  
-}
 
 .login-item {
   display: flex;
@@ -58,6 +54,9 @@
   margin: 0;
 }
 
+.input-container.Mui-selected{
+  background-color: black;
+}
 
 .switch-sign-up-login-container {
   padding-bottom: 10%;
