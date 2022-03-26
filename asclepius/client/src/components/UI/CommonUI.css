@@ -1,0 +1,78 @@
+
+.select{
+    width: 50%;
+    margin: auto;
+    align-items: center;
+}
+
+.remove-patient > form >button{
+    color: black;
+    margin: 10px;
+}
+
+.patient-list-container {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px;
+    overflow: scroll;
+    width: 70%;
+    height: 80%;
+    margin: 0 auto;
+}
+
+.patientItem {
+    display: flex;
+    background-color: white;
+    /* border: 1px solid black; */
+    margin: 2px;
+    font-family: 'Raleway', sans-serif;
+    box-shadow: 0px 10px 40px rgba(0,0,0,0.4);
+    pointer-events: auto;
+}
+
+.patientItem:hover {
+    background-color: #61dafb;
+    transform: scale(1);
+}
+
+.patientItem > h4 {
+    margin-left: 0px;
+}
+
+.staff-selection{
+    width:45%;
+    margin-right:2%;
+    float: left;
+}
+
+/* .staff-selection > label {
+  
+}
+.staff-selection > label input{
+ 
+  } */
+
+  .patient-selection{
+    width:45%;
+    margin-left:2%;
+    float: left;
+}
+
+.assign-form > form > button{
+    color: black;
+    margin: 15px;
+}
+
+.add-patient {
+    width: 50%;
+    margin: auto;
+}
+
+.add-patient > div {
+margin-bottom: 20px;
+}
+  
+.add-patient > form > button{
+color: black;
+margin: 10px;  
+}
