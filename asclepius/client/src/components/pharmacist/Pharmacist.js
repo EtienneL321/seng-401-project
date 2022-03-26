@@ -16,7 +16,7 @@ const Pharmacist = (props) => {
     const { auth } = useAuth();
     const [staffInfo, setStaffInfo] = useState({});
     const [orders, setOrders] = useState([]);
-    const [ordersFlag, setOrdersFlag] = useState(false);
+    const [changeFlag, setChangeFlag] = useState(false);
     const [inventory, setInventory] = useState([]);
     // console.log(auth);
 
@@ -39,8 +39,31 @@ const Pharmacist = (props) => {
         setMainComponentState("makeOrderView");
     }
 
-    const handleMakeOrder = async (medicationID, amount) => {
+    const handleMakeOrder = async (medication_ID, amount) => {
+        if(amount <= 0 ){
+            alert("Please enter an amount greater than 0.");
+        }
+        else if(medication_ID == 0){
+            alert("Please choose a medication to order.");
+        }
+        else{
+            const medicationInvolved = inventory.find(({medicationID}) => medicationID === medication_ID);
+            console.log("The medication ID");
+            console.log(medication_ID);
+            const newMedAmount = medicationInvolved.amount + parseInt(amount);
+            // increment the medication in the inventory
+            let inventoryParams = {
+                amount: newMedAmount,
+                medicationID: medication_ID,
+            };
+            await axios.put("http://localhost:3001/api/put/inventory/info", inventoryParams);
 
+            //alert that the change has been made
+            alert("Order has been made!");
+            setChangeFlag(prev => !prev);
+            // return to orders page
+            showInventory();
+        }
     };
 
     const handleFulfillOrder = async (order) => {
@@ -58,7 +81,7 @@ const Pharmacist = (props) => {
         const newMedAmount = medicationInvolved.amount - order.amount;
         if(newMedAmount < 0) {
             //error
-            alert("Not enough medicine in inventory");
+            alert("Medicine is out of stock, please order more.");
         }
         else{
             // update the prescription
@@ -73,7 +96,7 @@ const Pharmacist = (props) => {
 
             //alert that the change has been made
             alert("Order has been fulfilled!");
-            setOrdersFlag(prev => !prev);
+            setChangeFlag(prev => !prev);
             // return to orders page
             showOrders();
         }
@@ -92,7 +115,7 @@ const Pharmacist = (props) => {
             return <FulfillOrder order={selectedOrder} inventoryInfo={inventory} handleFulfillOrder={handleFulfillOrder}/>
         }
         else if(compState === "makeOrderView"){
-            return <MakeOrder />
+            return <MakeOrder handleMakeOrder={handleMakeOrder} inventory={inventory}/>
         }
     }
 
@@ -121,7 +144,7 @@ const Pharmacist = (props) => {
             }
         };
         fetchStaffAndPatients();
-    }, [auth, setMainComponentState, setInventory, setOrders, ordersFlag]);
+    }, [auth, setMainComponentState, setInventory, setOrders, changeFlag]);
 
     return (
         <div className='MainApp'>
