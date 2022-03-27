@@ -58,6 +58,10 @@
   background-color: black;
 }
 
+.login-signup-button:hover{
+  color: #1e8fffbb;
+}
+
 .switch-sign-up-login-container {
   padding-bottom: 10%;
 }

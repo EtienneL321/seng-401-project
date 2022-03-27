@@ -10,7 +10,8 @@
     height: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     flex-direction: column;
-    background-image: linear-gradient(white, #1e8fffbb);
+    /* background-image: linear-gradient(white, #1e8fffbb); */
+    background-color: #1e8fff42;
     text-align: center;
 }
 
@@ -33,12 +34,12 @@ button:hover {
 
 .nav-btns {
     font-size: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
     background-color: transparent;
     border: none;
-    width: 100%;
+    width: 95.5%;
     /* border: none; */
 }
 
