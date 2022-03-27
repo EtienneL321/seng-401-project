@@ -1,5 +1,6 @@
 import React from 'react';
 import './Pharmacist.css';
+import { Button } from "@material-ui/core";
 
 const OrderList = ({ordersInfo, showFulfillOrder, setOrders}) => {
     // const ordersInfo = props.ordersInfo;
@@ -7,21 +8,31 @@ const OrderList = ({ordersInfo, showFulfillOrder, setOrders}) => {
 
     return (
         <div>
-            <h3>Orders</h3>
+            <h2>Orders</h2>
             <div className='order-list-container'>
-                {ordersInfo
-                .map((order) => {
-                    return (
-                        <div className='order-item' key={order.prescriptionID}>
-                            <p>Prescription ID: {order.prescriptionID}, </p>
-                            <p>Patient Name: {order.patientName}, </p>
-                            <p>Requestee: {order.requesteeName}, </p>
-                            <p>Medication: {order.medication}, </p>
-                            <button type="button" onClick={() => {showFulfillOrder(order)}}> Fulfill Order</button>
-                        </div>
-                    );
-                })}
-                
+                <table className="order-table">
+                    <tr>
+                        <th> Prescription ID </th>
+                        <th> Patient Name </th>
+                        <th> Requestee</th>
+                        <th> Medication </th>
+                        <th> Order </th>
+                    </tr>
+                    {ordersInfo
+                    .map((order) => {
+                        return (
+                            // <div className='order-item' key={order.prescriptionID}>
+                            <tr>
+                                <td>{order.prescriptionID}, </td>
+                                <td>{order.patientName}, </td>
+                                <td>{order.requesteeName}, </td>
+                                <td>{order.medication}, </td>
+                                <Button type="button" variant= "contained" onClick={() => {showFulfillOrder(order)}}> Fulfill Order</Button>
+                            </tr>
+                            // </div>
+                        );
+                    })}
+                </table>
             </div>
         </div>
     );

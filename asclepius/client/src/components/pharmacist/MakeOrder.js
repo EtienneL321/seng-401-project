@@ -3,6 +3,7 @@ import './Pharmacist.css';
 import Input from "@material-ui/core/Input";
 import Select from 'react-select';
 import { useState } from 'react';
+import { Button } from "@material-ui/core";
 
 
 const MakeOrder = ({handleMakeOrder, inventory}) => {
@@ -29,9 +30,9 @@ const MakeOrder = ({handleMakeOrder, inventory}) => {
                             onChange={(e) => setAmount(e.target.value)}
                         />
                     </div>
-                    <button type="button" className='order-btn' onClick={() => handleMakeOrder(medicationID, amount)}>
+                    <Button type="button" variant="contained" onClick={() => handleMakeOrder(medicationID, amount)}>
                         Make Order
-                    </button>
+                    </Button>
                 {/* </form> */}
                 
             </div>

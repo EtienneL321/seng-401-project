@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: column;
     box-shadow: 10px;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
     width: 70%;
     height: 80%;
     margin: 0 auto;
@@ -19,10 +20,7 @@
 }
 
 .patientItem:hover {
+    color: black;
     background-color: #61dafb;
-    transform: scale(1);
-}
-
-.patientItem > h4 {
-    margin-left: 15px;
+    transform: scale(1.1);
 }
