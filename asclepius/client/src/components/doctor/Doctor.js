@@ -4,7 +4,6 @@ import NavBar from '../UI/NavBar';
 import useAuth from '../../hooks/useAuth';
 import '../home/HomePage.css';
 import '../CommonUser.css';
-import PatientList from '../UI/Patients/PatientList';
 import PatientRender from '../UI/Patients/PatientRender';
 
 const Doctor = (props) => {
