@@ -10,7 +10,6 @@
 
 .patientItem {
     display: flex;
-<<<<<<< HEAD
     background-color: white;
     /* border: 1px solid black; */
     margin: 2px;
@@ -24,15 +23,6 @@
     transform: scale(1);
 }
 
-=======
-    border-radius: 25px;
-    background-color: white;
-    /* border: 1px solid black; */
-    margin: 2%;
-    font-family: 'Raleway', sans-serif;
-    box-shadow: 0px 20px 40px rgba(0,0,0,0.4);
-}
->>>>>>> cf09e04 (ui done for default pages)
 .patientItem > h4 {
     margin-left: 15px;
 }
