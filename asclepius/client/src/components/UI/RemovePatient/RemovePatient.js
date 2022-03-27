@@ -34,6 +34,7 @@ const RemovePatient = (props) => {
             {confirmState ? 
             (<Confirm confirmHandler={confirmRemovePatient} cancelHandler={cancelRemovePatient}>
                 <h2>Confirm Remove Patient</h2>
+                <p style={{color:'red'}}>***Are you sure you want to remove this patient?*** <br />***Removing a patient removes all their assignments as well.***</p>
                 <p>patientID: {patientValue}</p>
                 <br />
             </Confirm>)
