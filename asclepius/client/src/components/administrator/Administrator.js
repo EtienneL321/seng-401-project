@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import NavBar from '../UI/NavBar';
-import PatientList from '../UI/Patients/PatientList';
+import PatientRender from '../UI/Patients/PatientRender';
 import axios from 'axios';
 import { Button } from '@material-ui/core';
 import '../home/HomePage.css';
@@ -31,7 +31,7 @@ const Administrator = (props) => {
     function MainComponentRender(props){
         const compState = props.compState;
         if(compState === "patientListView"){
-            return <PatientList title={"All patients"} assignedPatientsInfo={allPatients}/>
+            return <PatientRender title={"All patients"} assignedPatientsInfo={allPatients}/>
         }else if (compState === "inventoryView"){
             return <InventoryList inventoryInfo={inventory}/>;
         }else if(compState === "addRemovePatient"){

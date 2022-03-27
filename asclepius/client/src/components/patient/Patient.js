@@ -10,7 +10,7 @@ const Patient = (props) => {
     return (
         <div className='MainApp'>
             <div className='main-page-content'>
-                <h2>Hello World!</h2>
+                <h2>Hello {props.patientFile.patientName}</h2>
             </div>
         </div>
     )
