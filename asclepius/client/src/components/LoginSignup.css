@@ -24,6 +24,10 @@
   color: white;
 }
 
+.title-container img {
+  width: 50%;
+}
+
 .rightLoginContainer {
   width: 50vw;
   display: flex;
