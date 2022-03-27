@@ -105,6 +105,44 @@ app.get("/api/get/staff/password", (req, res) => {
     });
 });
 
+// DELETE A STAFF
+app.delete("/api/delete/staff/remove", (req, res) => {
+
+    var error1;
+
+    const givenID = req.query.staffID;
+    console.log("This is server side:", givenID);
+
+    const sqlDeleteAssignments = 
+        "DELETE FROM assignments WHERE assignments.careGiverID=?";
+    db.query(sqlDeleteAssignments, [givenID], (err, result) => {
+        if (err){
+            console.log(err);
+            return res.status(400).send({ error: "SOME ERROR OCCURED" });
+        }
+    });
+
+    const sqlDelete = 
+        "DELETE FROM staff WHERE staff.staffID=?"
+    db.query(sqlDelete, [givenID], (err, result) => {
+        if (err){
+            console.log(err);
+            return res.status(400).send({ error: "SOME ERROR OCCURED" });
+        }
+        res.send(result);
+    });  
+});
+
+// GET ALL ASSIGNMENTS
+app.get("/api/get/assignments", (req, res) => {
+    const sqlSelect = "SELECT * FROM assignments";
+    db.query(sqlSelect, (err, result) => {
+        if (err) throw err;
+        //console.log(result);
+        res.send(result);
+    });
+});
+
 // POST STAFF ASSIGNMENTS
 app.post("/api/post/staff/assignment", (req, res) => {
 
@@ -120,6 +158,23 @@ app.post("/api/post/staff/assignment", (req, res) => {
         }
         res.send(result);
     });  
+});
+
+// DELETE AN ASSIGNMENT
+app.delete("/api/delete/assignments/remove", (req, res) => {
+
+    const givenPatientID = req.query.patientID;
+    const givenCareGiverID = req.query.careGiverID;
+
+    const sqlDeleteAssignments = 
+        "DELETE FROM assignments WHERE assignments.patientID=? AND assignments.careGiverID=?";
+    db.query(sqlDeleteAssignments, [givenPatientID, givenCareGiverID], (err, result) => {
+        if (err){
+            console.log(err);
+            return res.status(400).send({ error: "SOME ERROR OCCURED" });
+        }
+        res.send(result);
+    });
 });
 
 // PATIENTS
@@ -156,7 +211,7 @@ app.post("/api/post/patients/newpatient", (req, res) => {
         "INSERT INTO patients (name, address, phone) VALUES (?,?,?);"
     db.query(sqlInsert, [givenName, givenAddress, givenPhone], (err, result) => {
         if (err){
-            return res.status(400).send({ error: 'SOME ERROR' });
+            return res.status(400).send({ error: 'SOME ERROR OCCURED' });
         }
         res.send(result);
     });  
@@ -168,11 +223,21 @@ app.delete("/api/delete/patients/remove", (req, res) => {
     const givenID = req.query.patientID;
     console.log("This is server side:", givenID);
 
+    const sqlDeleteAssignments = 
+        "DELETE FROM assignments WHERE assignments.patientID=?";
+    db.query(sqlDeleteAssignments, [givenID], (err1, result) => {
+        if (err1){
+            console.log(err1);
+            return res.status(400).send({ error: "SOME ERROR OCCURED" });
+        }
+    });
+
     const sqlDelete = 
-        "DELETE FROM patients WHERE patients.patientID=?"
-    db.query(sqlDelete, [givenID], (err, result) => {
-        if (err){
-            return res.status(400).send({ error: 'SOME ERROR' });
+        "DELETE FROM patients WHERE patients.patientID=?";
+    db.query(sqlDelete, [givenID], (err2, result) => {
+        if (err2){
+            console.log(err2);
+            return res.status(400).send({ error: "SOME ERROR OCCURED" });
         }
         res.send(result);
     });  

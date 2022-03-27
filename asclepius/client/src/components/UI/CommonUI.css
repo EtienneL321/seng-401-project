@@ -10,6 +10,11 @@
     margin: 10px;
 }
 
+.remove-staff > form >button{
+    color: black;
+    margin: 10px;
+}
+
 .patient-list-container {
     display: flex;
     flex-direction: column;
@@ -73,6 +78,20 @@ margin-bottom: 20px;
 }
   
 .add-patient > form > button{
+color: black;
+margin: 10px;  
+}
+
+.add-staff {
+    width: 50%;
+    margin: auto;
+}
+
+.add-staff > div {
+margin-bottom: 20px;
+}
+  
+.add-staff > form > button{
 color: black;
 margin: 10px;  
 }
