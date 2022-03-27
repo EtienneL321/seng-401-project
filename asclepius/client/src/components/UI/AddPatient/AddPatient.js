@@ -91,7 +91,7 @@ const AddPatient = (props) => {
                         fullWidth
                     />
                 </div>
-                <Button variant="outlined" type="submit">Add Patient</Button>
+                <Button variant="contained" type="submit">Add Patient</Button>
             </form>)}
         </div>
     );

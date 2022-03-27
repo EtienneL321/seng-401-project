@@ -1,12 +1,3 @@
-.order-list-container {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    height: 80%;
-    margin: 0 auto;
-    /* overflow:scroll; */
-    overflow-y: scroll
-}
 
 .inventory-table {
     text-align: center;
@@ -23,7 +14,7 @@
 
 .inventory-table tr:nth-child(even){background-color: #f2f2f2;}
 
-.inventory-table tr:hover {background-color: rgb(197, 193, 193);}
+.inventory-table tr:hover {background-color: rgb(224, 221, 221);}
 
 .inventory-table th {
     padding-top: 12px;
@@ -55,4 +46,69 @@
     width: 130px;
     font-size: 15px;
     margin: 0 auto;
+}
+
+.order-list-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.order-table {
+    text-align: center;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border: 3px solid #ddd;
+    width: 100%;
+  }
+
+.order-table td, .inventory-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+.order-table tr:nth-child(even){background-color: #f2f2f2;}
+
+.order-table tr:hover {background-color: rgb(224, 221, 221);}
+
+.order-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #4c87af;
+    color: white;
+  }
+
+  .order-table > tr > Button{
+      margin: 5px;
+  }
+
+  .order-table > tr > Button:hover{
+    color: black;
+}
+
+.make-order-form-container {
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+}
+
+.make-order-form-container > .input-container Input{
+    /* background-color: red; */
+    text-align: center;
+    font-size: 25px;
+    margin: 5px;
+    margin-top: 25px;
+}
+
+.make-order-form-container > Button{
+    margin: 30px;
+}
+
+.make-order-form-container > Button:hover{
+    color:black;
 }

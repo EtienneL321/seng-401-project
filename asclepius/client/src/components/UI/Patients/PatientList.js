@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../CommonUI.css';
+import './PatientList.css';
 import Patient from '../../patient/Patient';
+import { Button } from "@material-ui/core";
+
 
 
 const PatientList = (props) => {
@@ -14,10 +16,10 @@ const PatientList = (props) => {
                     {assignedPatientsInfo
                     .map((patient) => {
                         return (
-                            <button key={patient.patientID} className='patientItem' onClick={() => props.renderPatient(patient)}>
-                                <h4>Patient ID: {patient.patientID}, </h4>
-                                <h4>Name:{patient.patientName}</h4>
-                            </button>
+                            <Button variant="contained" key={patient.patientID} className='patientItem' onClick={() => props.renderPatient(patient)}>
+                                <h3>Patient ID: {patient.patientID}, &nbsp;&nbsp;&nbsp; </h3>
+                                <h3>Name:{patient.patientName}</h3>
+                            </Button>
                         );
                     })}
                 </div>

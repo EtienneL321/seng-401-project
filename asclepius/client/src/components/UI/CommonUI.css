@@ -57,7 +57,7 @@
  
   } */
 
-  .patient-selection{
+.patient-selection{
     width:45%;
     margin-left:2%;
     float: left;
@@ -74,12 +74,13 @@
 }
 
 .add-patient > div {
-margin-bottom: 20px;
+    margin-bottom: 20px;
 }
   
 .add-patient > form > button{
-color: black;
-margin: 10px;  
+    background-color: lightgrey;
+    color: black;
+    margin: 10px;  
 }
 
 .add-staff {
@@ -88,10 +89,18 @@ margin: 10px;
 }
 
 .add-staff > div {
-margin-bottom: 20px;
+    margin-bottom: 20px;
 }
   
 .add-staff > form > button{
-color: black;
-margin: 10px;  
+    background-color: lightgrey;
+    color: black;
+    margin: 10px;  
+}
+
+.add-patient > form > button:hover{
+    background-color: lightgrey;
+}
+.add-staff > form > button:hover{
+    background-color: lightgrey;
 }
