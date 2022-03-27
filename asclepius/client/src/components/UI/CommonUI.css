@@ -6,13 +6,23 @@
 }
 
 .remove-patient > form >button{
+    background-color: lightgrey;
     color: black;
     margin: 10px;
 }
 
+.remove-patient > form > button:hover{
+    background-color: lightgrey;
+}
+
 .remove-staff > form >button{
+    background-color: lightgrey;
     color: black;
     margin: 10px;
+}
+
+.remove-staff > form > button:hover{
+    background-color: lightgrey;
 }
 
 .patient-list-container {
