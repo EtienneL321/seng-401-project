@@ -4,7 +4,8 @@ import NavBar from '../UI/NavBar';
 import useAuth from '../../hooks/useAuth';
 import '../home/HomePage.css';
 import '../CommonUser.css';
-import PatientList from '../UI/Patients/PatientList';
+import PatientList from '../UI/Patients/PatientRender';
+import PatientRender from '../UI/Patients/PatientRender';
 
 const Doctor = (props) => {
     // console.log(props.patients);
@@ -19,7 +20,7 @@ const Doctor = (props) => {
     function MainComponentRender(props){
         const compState = props.compState;
         if(compState === "patientListView"){
-            return <PatientList assignedPatientsInfo={assignedPatientsInfo}/>
+            return <PatientRender assignedPatientsInfo={assignedPatientsInfo}/>
         }
     }
 
