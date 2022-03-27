@@ -10,13 +10,19 @@
 
 .patientItem {
     display: flex;
-    border-radius: 25px;
     background-color: white;
     /* border: 1px solid black; */
-    margin: 2%;
+    margin: 2px;
     font-family: 'Raleway', sans-serif;
-    box-shadow: 0px 20px 40px rgba(0,0,0,0.4);
+    box-shadow: 0px 10px 40px rgba(0,0,0,0.4);
+    pointer-events: auto;
 }
+
+.patientItem:hover {
+    background-color: #61dafb;
+    transform: scale(1);
+}
+
 .patientItem > h4 {
     margin-left: 15px;
 }
