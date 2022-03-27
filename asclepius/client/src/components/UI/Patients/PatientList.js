@@ -6,8 +6,8 @@ import { Divider } from '@material-ui/core';
 const PatientList = (props) => {
     const assignedPatientsInfo = props.assignedPatientsInfo;
 
-    const renderPatient = () => {
-        console.log("Rendered patient");
+    const renderPatient = (p) => {
+        console.log("Rendered patient", p);
     }
 
     return (
@@ -17,7 +17,7 @@ const PatientList = (props) => {
                 {assignedPatientsInfo
                 .map((patient) => {
                     return (
-                        <button key={patient.patientID} className='patientItem' onClick={renderPatient}>
+                        <button key={patient.patientID} className='patientItem' onClick={() => renderPatient(patient)}>
                             <h4>Patient ID: {patient.patientID}, </h4>
                             <h4>Name:{patient.patientName}</h4>
                         </button>
