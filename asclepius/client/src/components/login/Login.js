@@ -98,11 +98,7 @@ const Login = (props) => {
                 />
               </div>
             </div>
-<<<<<<< HEAD
             <Button type="submit" variant="outlined" color="primary" className="login-signup-button">
-=======
-            <Button type="submit" variant="outlined" color="primary">
->>>>>>> cf09e04 (ui done for default pages)
               Login
             </Button>
             <div>

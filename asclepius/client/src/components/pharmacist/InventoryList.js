@@ -6,18 +6,25 @@ const InventoryList = (props) => {
 
     return (
         <div>
-            <h3>Inventory</h3>
+            <h2>Inventory</h2>
             <div className='order-list-container'>
-                {inventoryInfo
-                .map((inventoryItem) => {
-                    return (
-                        <div className='order-item' key={inventoryItem.medicationID}>
-                            <p>ID: {inventoryItem.medicationID}, </p>
-                            <p>Name: {inventoryItem.name}, </p>
-                            <p>Amount: {inventoryItem.amount}, </p>
-                        </div>
-                    );
-                })}
+                <table className="inventory-table">
+                    <tr>
+                        <th> ID </th>
+                        <th> Name </th>
+                        <th> Amount </th>
+                    </tr>
+                    {inventoryInfo
+                    .map((inventoryItem) => {
+                        return (
+                                <tr key={inventoryItem.medicationID}>
+                                    <td>{inventoryItem.medicationID} </td>
+                                    <td>{inventoryItem.name} </td>
+                                    <td>{inventoryItem.amount} </td>
+                                </tr>
+                        );
+                    })}
+                </table>
                 
             </div>
         </div>

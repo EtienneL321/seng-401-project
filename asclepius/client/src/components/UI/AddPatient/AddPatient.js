@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 import Confirm from "../Messages/Confirm";
+import '../CommonUI.css';
 
 const AddPatient = (props) => {
 
@@ -42,17 +43,14 @@ const AddPatient = (props) => {
     }
 
     return (
-        <div>
+        <div className="add-patient">
             <h2>Add Patient</h2>
             {confirmState ? 
             <Confirm confirmHandler={confirmAddPatient} cancelHandler={cancelAddPatient}>
                 <h2>Confirm Add Patient</h2>
-                <p>patientName: {enteredName}</p>
-                <br />
-                <p>address: {enteredAddress}</p>
-                <br />
-                <p>phone: {enteredPhone}</p>
-                <br />
+                <p>Patient Name: {enteredName}</p>
+                <p>Address: {enteredAddress}</p>
+                <p>Phone: {enteredPhone}</p>
             </Confirm>
             : (<form onSubmit={addPatientHandler}>
                 <div>
