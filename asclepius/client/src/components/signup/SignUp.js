@@ -137,7 +137,7 @@ const SignUp = () => {
                 />
               </div>
             </div>
-            <Button type="submit" variant="outlined" color="primary">
+            <Button type="submit" variant="outlined" color="primary" className="login-signup-button">
               Sign Up
             </Button>
             <div>

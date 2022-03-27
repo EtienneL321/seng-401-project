@@ -98,7 +98,7 @@ const Login = (props) => {
                 />
               </div>
             </div>
-            <Button type="submit" variant="outlined" color="primary">
+            <Button type="submit" variant="outlined" color="primary" className="login-signup-button">
               Login
             </Button>
             <div>
