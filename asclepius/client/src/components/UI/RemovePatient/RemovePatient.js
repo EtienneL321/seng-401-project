@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@material-ui/core";
 import Select from 'react-select';
 import Confirm from "../Messages/Confirm";
+import '../CommonUI.css';
 
 const RemovePatient = (props) => {
 
@@ -28,7 +29,7 @@ const RemovePatient = (props) => {
     }
 
     return (
-        <div>
+        <div className="remove-patient">
             <h2>Remove Patient</h2>
             {confirmState ? 
             (<Confirm confirmHandler={confirmRemovePatient} cancelHandler={cancelRemovePatient}>
@@ -40,6 +41,7 @@ const RemovePatient = (props) => {
                 <Select
                     options={props.patients.map(p => ({label: p.patientName, value: p.patientID}))}
                     onChange={(e) => setPatientValue(e.value)}
+                    className = "select"
                 />
                 <Button variant="outlined" type="submit">Remove Patient</Button>
             </form>)}

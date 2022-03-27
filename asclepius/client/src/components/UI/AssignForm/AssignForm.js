@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import Confirm from "../Messages/Confirm";
 import Select from "react-select";
+import '../CommonUI.css';
 
 const AssignForm = (props) => {
 
@@ -36,23 +37,22 @@ const AssignForm = (props) => {
     };
 
     return (
-        <div>
+        <div className = "assign-form">
             <h1>Assign Staff to Patient</h1>
             {confirmState ? 
             (<Confirm confirmHandler={confirmAssignment} cancelHandler={cancelAssignment}>
                 <h2>Confirm Assignment</h2>
-                <p>careGiverID: {staffValue}</p>
-                <br />
-                <p>patientID: {patientValue}</p>
-                <br />
-                <p>assignerID: {props.self.staffID}, assignerName: {props.self.Name}</p>
+                <p>Care Giver: {staffValue}</p>
+                <p>Patient ID: {patientValue}</p>
+                <p>Assigner ID: {props.self.staffID}, Assigner Name: {props.self.Name}</p>
                 <br />
             </Confirm>) : 
-            (<form onSubmit={openConfirm}>
+            (<form onSubmit={openConfirm} >
+                
                 <div className="staff-selection">
                     <h2>Staff Selection</h2>
                     <h3>Doctors</h3>
-                    {props.doctors.map((d) => <label><input name="staff" type="radio" value={d.staffID} onChange={changeStaffRadio}/> {d.staffID + ", " + d.Name} <br /></label>)}
+                    {props.doctors.map((d) => <label><input name="staff" type="radio" className= "selector" value={d.staffID} onChange={changeStaffRadio}/> {d.staffID + ", " + d.Name} <br /></label>)}
                     <h3>Nurses</h3>
                     {props.nurses.map((n) => <label><input name="staff" type="radio" value={n.staffID} onChange={changeStaffRadio}/> {n.staffID + ", " + n.Name} <br /></label>)}
                 </div>
@@ -64,7 +64,7 @@ const AssignForm = (props) => {
                         onChange={(e) => setPatientValue(e.value)}
                     />
                 </div>
-                <Button variant="contained" type="submit">Assign</Button>
+                <Button variant="contained" type="submit" className= "assign-button">Assign</Button>
             </form>)}
         </div>
     )

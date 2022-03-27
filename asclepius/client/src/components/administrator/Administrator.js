@@ -36,7 +36,7 @@ const Administrator = (props) => {
             return <InventoryList inventoryInfo={inventory}/>;
         }else if(compState === "addRemovePatient"){
             return (
-                <div>
+                <div className ="add-remove-btns">
                     <h1>Add/Remove Patient</h1>
                     <Button variant="contained" style={addRemoveState ? {backgroundColor:"lightblue"} : {backgroundColor:"lightgrey"}} onClick={() => {setAddRemoveState(true);}}>Add</Button>
                     <Button variant="contained" style={addRemoveState ? {backgroundColor:"lightgrey"} : {backgroundColor:"lightblue"}} onClick={() => {setAddRemoveState(false);}}>Remove</Button>

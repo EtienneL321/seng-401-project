@@ -1,11 +1,37 @@
 .order-list-container {
     display: flex;
     flex-direction: column;
-    overflow: scroll;
     width: 70%;
     height: 80%;
     margin: 0 auto;
+    /* overflow:scroll; */
+    overflow-y: scroll
 }
+
+.inventory-table {
+    text-align: center;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border: 3px solid #ddd;
+    width: 100%;
+  }
+
+.inventory-table td, .inventory-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+.inventory-table tr:nth-child(even){background-color: #f2f2f2;}
+
+.inventory-table tr:hover {background-color: rgb(197, 193, 193);}
+
+.inventory-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #4c87af;
+    color: white;
+  }
 
 .order-item {
     display: flex;

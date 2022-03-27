@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './PatientList.css';
+import '../CommonUI.css';
 import Patient from '../../patient/Patient';
 import PatientList from "./PatientList";
 
