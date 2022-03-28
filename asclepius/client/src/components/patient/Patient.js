@@ -84,11 +84,7 @@ const Patient = (props) => {
                     </table>
 
                     <div className="buttons">
-<<<<<<< HEAD
                         { staffType === "A" ? null : <button type="button" variant= "contained" onClick={() => {setMainComonentState("addMedication")}}> Add Medication</button>}
-=======
-                        <button type="button" variant= "contained" onClick={() => {setMainComonentState("deleteMedication")}}> Delete Medication</button>
->>>>>>> 7b13562 (Layout for Medication Order)
                     </div>
 
                     <table className="diagnoses-table">
