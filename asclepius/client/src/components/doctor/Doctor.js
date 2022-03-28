@@ -7,6 +7,8 @@ import '../CommonUser.css';
 import PatientRender from '../UI/Patients/PatientRender';
 import AssignMedication from './AssignMedication';
 import ViewMedication from './ViewMedication';
+import Error from '../UI/Messages/Error';
+import Success from '../UI/Messages/Success';
 
 const Doctor = (props) => {
     // console.log(props.patients);
@@ -16,21 +18,47 @@ const Doctor = (props) => {
     const [assignedPatientsInfo, setAssignedPatientsInfo] = useState([]);
     const [allMedication, setAllMedication] = useState([]);
     const [mainComponentState, setMainComonentState] = useState("patientListView");
-
-    const [selectedPatient, setSelectedPatient] = useState(null);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    const [ renderState, setRenderState ]= useState(true);
 
     function MainComponentRender(props){
         const compState = props.compState;
         if (compState === "patientListView"){
             return <PatientRender assignedPatientsInfo={assignedPatientsInfo} staffInfo={staffInfo}/>
         } else if (compState === "orderMedication") {
-            return <AssignMedication patients={assignedPatientsInfo} staffInfo={staffInfo} medication={allMedication}/>
+            return errorMessage ? 
+            <Error handleError={handleError}>{errorMessage}</Error> 
+            : successMessage ? 
+            <Success handleSuccess={handleSuccess}>{successMessage}</Success> 
+            : <AssignMedication patients={assignedPatientsInfo} staffInfo={staffInfo} medication={allMedication} addPrescription={handleAddPrescription}/>
         } else if (compState === "readyForPickup") {
             return <ViewMedication />
         }
 
         console.log(compState);
     }
+
+    const handleAddPrescription = async (prescData) => {
+        await axios.post("http://localhost:3001/api/post/prescriptions/new", prescData).then((response) => {
+            console.log("This is the response from catch: ", response);
+        }).then(() => {
+            setSuccessMessage("Prescription order has been made!");
+        }).catch((err) => {
+            setErrorMessage(err.response.data.error);
+        });
+        setRenderState(!renderState);
+    }
+
+    const handleError = () => {
+        console.log("this is from error handling: ", errorMessage);
+        setErrorMessage("");
+    };
+
+    const handleSuccess = () => {
+        console.log("this is from success handling: ", successMessage);
+        setSuccessMessage("");
+    };
 
     useEffect(() => {
         const fetchStaffAndPatients = async () => {
@@ -54,7 +82,7 @@ const Doctor = (props) => {
             }
         };
         fetchStaffAndPatients();
-    }, [auth]);
+    }, [auth, renderState]);
 
     return (
         <div className='MainApp'>

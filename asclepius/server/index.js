@@ -406,6 +406,27 @@ app.put("/api/put/prescriptions/info", (req, res) => {
     });
 });
 
+// ADD NEW PRESCRIPTION
+
+app.post("/api/post/prescriptions/new", (req, res) => {
+    givenPatientID = req.body.patientID;
+    givenMedicationID = req.body.medicationID;
+    givenAmount = req.body.amount;
+    givenInstruction = req.body.instructions;
+    givenRequestee = req.body.requesteeID;
+    givenTime = req.body.time;
+
+    const sqlInsert1 = 
+        "INSERT INTO `Asclepius`.`prescriptions` (`medicationID`, `amount`, `instructions`, `patientID`, `requesteeID`, `timeWritten`) VALUES (?, ?, ?, ?, ?, ?);";
+    db.query(sqlInsert1, [givenMedicationID, givenAmount, givenInstruction, givenPatientID, givenRequestee, givenTime], (err, result) => {
+        if (err){
+            console.log(err);
+            return res.status(400).send({ error: 'SOME ERROR OCCURED' });
+        }
+        res.send(result);
+    });  
+});
+
 
 // INVENTORY
 // GET ALL INVENTORY ITEMS
