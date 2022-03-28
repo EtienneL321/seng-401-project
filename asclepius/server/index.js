@@ -465,3 +465,14 @@ app.post("/api/post/diagnoses/newdiagnoses", (req, res) => {
         res.send(result);
     });  
 });
+
+// GAIN INFO ABOUT THE PRESCRIPTION BASED ON ID
+app.get("/api/get/prescriptions/patient", (req, res) => {
+    givenID = req.query.patientID;
+    const sqlSelect = "SELECT * FROM prescriptions where patientID=?";
+    db.query(sqlSelect, [givenID], (err, result) => {
+        if (err) throw err;
+        //console.log(result);
+        res.send(result);
+    });
+});

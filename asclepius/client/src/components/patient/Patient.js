@@ -12,6 +12,9 @@ const Patient = (props) => {
     const { auth } = useAuth();
     const [diagnoses, setDiagnoses] = useState([]);
     const [allDoctors, setAllDoctors] = useState([]);
+    const [allMedication, setAllMedication] = useState([]);
+    const [prescriptions, setPrescriptions] = useState([]);
+
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [ mainComponentState, setMainComonentState ] = useState("patientView");
@@ -53,9 +56,26 @@ const Patient = (props) => {
                         <button type="button" variant= "contained" onClick={() => {setMainComonentState("addDiagnosis")}}> Add Diagnosis</button>
                     </div>
 
-                    <div>
-                        Assigned Medication
-                    </div>
+                    <table className="diagnoses-table">
+                        <tr>
+                            <th> Medication </th>
+                            <th> Instructions </th>
+                            <th> Amount </th>
+                        </tr>
+                        {prescriptions
+                        .map(p => {
+                            return (
+                                <tr key={p.prescriptionID}>
+                                    <td>{allMedication.map(med => {
+                                        if (med.medicationID === p.medicationID)
+                                            return (med.name)
+                                    })}, </td>
+                                    <td>{p.instructions}, </td>
+                                    <td>{p.amount}, </td>
+                                </tr>
+                            );
+                        })}
+                    </table>
                     <div>
                         Medical Notes
                     </div>
@@ -82,13 +102,18 @@ const Patient = (props) => {
                 const diagnosesData = await axios.get('http://localhost:3001/api/get/diagnoses',
                     { params: props.patientFile }
                 );
-                // console.log("Response for the diagnoses", diagnosesData);
                 setDiagnoses(diagnosesData.data.reverse());
-                // setMainComponentState("ordersView");
+
+                const prescriptions = await axios.get('http://localhost:3001/api/get/prescriptions/patient',
+                    { params: props.patientFile }
+                );
+                setPrescriptions(prescriptions.data);
 
                 const allDoctors = await axios.get('http://localhost:3001/api/get/staff/doctors');
-                // console.log("Response for the all doctors", allDoctors.data);
                 setAllDoctors(allDoctors.data);
+
+                const allMedication = await axios.get('http://localhost:3001/api/get/medications');
+                setAllMedication(allMedication.data);
             }
             catch (error){
                 console.error(error);
@@ -103,6 +128,8 @@ const Patient = (props) => {
         console.log("allDoctors", allDoctors);
         console.log("props.patientFile", props.patientFile);
         console.log("props.staffInfo",props.staffInfo);
+        console.log("prescriptions", prescriptions);
+        console.log("allMedication", allMedication);
     };
 
     const addDiagnosis = async (newDiagnosis) => {
@@ -130,7 +157,7 @@ const Patient = (props) => {
     return (
         <div >
             <div className='patient-top'>
-                <h2 className='patient-name'>Patient {props.patientFile.patientName}</h2>
+                <h2 className='patient-name' onClick={testFunction}>Patient {props.patientFile.patientName}</h2>
                 <h2 className='patient-id'>ID: {props.patientFile.patientID}</h2>
             </div>
 
