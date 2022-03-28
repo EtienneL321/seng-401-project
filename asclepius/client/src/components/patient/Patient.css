@@ -1,6 +1,10 @@
+.patient-file {
+    margin-right: 45px;
+}
+
 .patient-info {
     margin-top: 30px;
-    margin-left: 10%;
+    margin-left: 45px;
     text-align: left;
 }
 
@@ -9,16 +13,16 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-top: 10px;
+    margin-bottom: -40px;
 }
 
-.patient-name {
-    position: absolute;
+.patient-top > button {
+    margin-right: 50px;
 }
 
 .patient-id {
-    margin-left: 80%;
     font-size: 20px;
+    margin-left: 50px
 }
 
 .add-item {

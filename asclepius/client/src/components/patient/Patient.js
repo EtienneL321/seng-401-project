@@ -17,6 +17,7 @@ const Patient = (props) => {
     const [prescriptions, setPrescriptions] = useState([]);
     const [notes, setNotes] = useState([]);
     const [staffType, setStaffType] = useState([]);
+    const buttonText = useRef("<- Back to Patient List");
 
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
@@ -82,9 +83,12 @@ const Patient = (props) => {
                         })}
                     </table>
 
-                    {/* Will add delete button later */}
                     <div className="buttons">
+<<<<<<< HEAD
                         { staffType === "A" ? null : <button type="button" variant= "contained" onClick={() => {setMainComonentState("addMedication")}}> Add Medication</button>}
+=======
+                        <button type="button" variant= "contained" onClick={() => {setMainComonentState("deleteMedication")}}> Delete Medication</button>
+>>>>>>> 7b13562 (Layout for Medication Order)
                     </div>
 
                     <table className="diagnoses-table">
@@ -212,9 +216,14 @@ const Patient = (props) => {
         console.log("notes", notes);
     };
 
+    const listRenderHandler = () => {
+        props.renderList();
+    }
+
     return (
-        <div >
+        <div className="patient-file">
             <div className='patient-top'>
+                <button type="button" variant= "contained" onClick={listRenderHandler}> {buttonText.current} </button>
                 <h2 className='patient-name' onClick={testFunction}>Patient {props.patientFile.patientName}</h2>
                 <h2 className='patient-id'>ID: {props.patientFile.patientID}</h2>
             </div>
