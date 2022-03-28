@@ -2,7 +2,6 @@ import React from 'react';
 import './Pharmacist.css';
 
 const FulfillOrder = ({order, inventoryInfo, handleFulfillOrder}) => {
-    // const ordersInfo = props.ordersInfo;
 
     return (
         <div>
