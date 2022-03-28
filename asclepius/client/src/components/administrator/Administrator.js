@@ -162,6 +162,7 @@ const Administrator = (props) => {
         }).catch((err) => {
             setErrorMessage(err.response.data.error);
         });
+        setRenderState(!renderState);
 
     };
 
