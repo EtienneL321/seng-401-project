@@ -105,6 +105,28 @@ app.get("/api/get/staff/password", (req, res) => {
     });
 });
 
+// POST NEW STAFF
+app.post("/api/post/staff/newstaff", (req, res) => {
+
+    givenUsername = req.body.username;
+    givenPassword = req.body.password;
+    givenName = req.body.Name;
+    givenPhone = req.body.Phone;
+    givenAddress = req.body.Address;
+    givenContactNumber = req.body.ContactNumber;
+    givenStaffType = req.body.staffType;
+    givenClearanceLevel = req.body.clearanceLevel;
+
+    const sqlInsert = 
+        "INSERT INTO staff (username, password, Name, Phone, Address, ContactNumber, staffType, clearanceLevel) VALUES (?,?,?,?,?,?,?,?);"
+    db.query(sqlInsert, [givenUsername, givenPassword, givenName, givenPhone, givenAddress, givenContactNumber, givenStaffType, givenClearanceLevel], (err, result) => {
+        if (err){
+            return res.status(400).send({ error: 'SOME ERROR OCCURED' });
+        }
+        res.send(result);
+    });  
+});
+
 // DELETE A STAFF
 app.delete("/api/delete/staff/remove", (req, res) => {
 
