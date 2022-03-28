@@ -436,5 +436,32 @@ app.post("/api/post/inventory/new", (req, res) => {
     });  
 });
 
+// PATIENT FILE
+// GET PATIENT DIAGNOSIS
+app.get("/api/get/diagnoses", (req, res) => {
+    requestedPatientID = req.query.patientID;
+    const sqlSelect = "SELECT * FROM diagnoses WHERE patientID=?";
+    db.query(sqlSelect, [requestedPatientID], (err, result) => {
+        if (err) throw err;
+        //console.log(result);
+        res.send(result);
+    });
+});
 
+// POST NEW DIAGNOSIS
+app.post("/api/post/diagnoses/newdiagnoses", (req, res) => {
+    givenName = req.body.name;
+    givenDate = req.body.date;
+    givenComments = req.body.comments;
+    givenPatientID = req.body.patientID;
+    givenDoctorID = req.body.doctorID;
 
+    const sqlInsert = 
+        "INSERT INTO diagnoses (name, date, comments, patientID, doctorID) VALUES (?,?,?,?,?);"
+    db.query(sqlInsert, [givenName, givenDate, givenComments, givenPatientID, givenDoctorID], (err, result) => {
+        if (err){
+            return res.status(400).send({ error: 'SOME ERROR OCCURED' });
+        }
+        res.send(result);
+    });  
+});

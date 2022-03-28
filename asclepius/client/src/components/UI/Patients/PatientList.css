@@ -24,3 +24,36 @@
     background-color: #61dafb;
     transform: scale(1.1);
 }
+
+.diagnoses-table {
+    text-align: center;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border: 3px solid #ddd;
+    width: 100%;
+  }
+
+.diagnoses-table td, .inventory-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+.diagnoses-table tr:nth-child(even){background-color: #f2f2f2;}
+
+.diagnoses-table tr:hover {background-color: rgb(224, 221, 221);}
+
+.diagnoses-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #4c87af;
+    color: white;
+  }
+
+  .diagnoses-table > tr > Button{
+      margin: 5px;
+  }
+
+  .diagnoses-table > tr > Button:hover{
+    color: black;
+}

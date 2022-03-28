@@ -15,11 +15,12 @@ const PatientRender = (props) => {
 
     const MainComponentRender = () => {
         if (patientFile) {
-            return <Patient patientFile={patient.current} />;
+            return <Patient patientFile={patient.current} staffInfo={props.staffInfo}/>;
         }
 
         return <PatientList 
                     renderPatient={renderPatient} 
+                    staffInfo={props.staffInfo}
                     assignedPatientsInfo={props.assignedPatientsInfo} 
                     title={props.title ? props.title : ""} 
                 />;
