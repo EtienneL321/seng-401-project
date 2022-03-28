@@ -406,6 +406,18 @@ app.put("/api/put/prescriptions/info", (req, res) => {
     });
 });
 
+// PICK UP A PATIENT PRESCRIPTION
+app.put("/api/put/prescriptions/info/docnurse", (req, res) => {
+    givenReceiverID = req.body.receiverID;
+    givenTime = req.body.time;
+    givenPrescID = req.body.prescriptionID;
+    const sqlSelect = "UPDATE `Asclepius`.`prescriptions` SET `receiverID` = ?, `timeReceived` = ? WHERE (`prescriptionID` = ?);"
+    db.query(sqlSelect, [givenReceiverID, givenTime, givenPrescID], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
 // ADD NEW PRESCRIPTION
 
 app.post("/api/post/prescriptions/new", (req, res) => {
@@ -427,6 +439,16 @@ app.post("/api/post/prescriptions/new", (req, res) => {
     });  
 });
 
+// GET ALL PRESCRIPTIONS REQUESTED BY GIVEN ID
+app.get("/api/get/prescriptions/reqid", (req, res) => {
+    givenID = req.query.staffID;
+
+    const sqlSelect = "select prescriptions.prescriptionID, medications.name as medication, prescriptions.medicationID, prescriptions.amount, prescriptions.instructions, patients.Name as patientName, patients.patientID, staff.Name as requesteeName, prescriptions.pharmisistID, staff.staffID from prescriptions, medications, staff, patients where isnull(prescriptions.receiverID) and prescriptions.medicationID=medications.medicationID and prescriptions.patientID=patients.patientID and prescriptions.requesteeID=staff.staffID and prescriptions.requesteeID=?";
+    db.query(sqlSelect, [givenID], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
 
 // INVENTORY
 // GET ALL INVENTORY ITEMS
