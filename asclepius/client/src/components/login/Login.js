@@ -5,7 +5,6 @@ import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 import GreetingBanner from "../GreetingBanner";
 import Axios from "axios";
-import "./Login.css";
 import "../../App.css";
 import "../LoginSignup.css";
 
@@ -52,8 +51,7 @@ const Login = (props) => {
       );
       console.log("THIS IS RESONSE", response.data);
       if (response?.data.length === 0) {
-        console.log("Invalid Combination");
-        setErrorMessage("Invalid Combination");
+        setErrorMessage("Username or Password is incorrect.");
         return;
       }
       const id = response?.data[0]?.staffID;
@@ -104,6 +102,7 @@ const Login = (props) => {
             <div>
               <p
                 id="errorMessage"
+                className="errorMessage"
                 ref={errRef}
                 style={
                   errorMessage ? { display: "block" } : { display: "none" }

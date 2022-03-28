@@ -29,9 +29,6 @@
 }
 
 /* For the Nav Bar */
-.nav-bar-container {
-  /* flex-grow: 1; */
-}
 
 .app-title-nav {
   flex-grow: 1;
@@ -54,7 +51,7 @@
 
 .logout-btn-nav {
   text-decoration: none;
-  color: white;
+  /* color: white; */
   /* margin-left: 5%; */
 
 }

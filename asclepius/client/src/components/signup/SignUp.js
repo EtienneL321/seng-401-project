@@ -66,7 +66,7 @@ const SignUp = () => {
       }
       if (enteredPassword.length === 0 || enteredUsername.length === 0) {
         console.log("Invalid Combination");
-        setErrorMessage("Invalid Combination");
+        setErrorMessage("Username or Password is incorrect.");
         reset();
         return;
       }

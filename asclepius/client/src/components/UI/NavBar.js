@@ -12,18 +12,12 @@ const NavBar = () => {
         <div className='nav-bar-container'>
             <AppBar position="static">
                 <Toolbar>
-                
                 <Typography className='app-title-nav' variant="h6" noWrap>
                     <Link to='/home' className='home-btn-nav'>
                         Asclepius
                     </Link>
                 </Typography>
                 <div className='pages-nav-navbar'>
-                    {/* <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
-                        <Button>Page 1</Button>
-                        <Button>Page 2</Button>
-                        <Button>Page 3</Button>
-                    </ButtonGroup> */}
                     <Link to='/login' className='logout-btn-nav'>
                         <Button variant="outlined" color="secondary">
                             Logout

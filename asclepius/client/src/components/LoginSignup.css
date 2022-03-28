@@ -73,3 +73,8 @@
 .switch-sign-up-login-container > p {
   font-size: 20px;
 }
+
+.errorMessage {
+  font-size: 15px;
+  color: red;
+}

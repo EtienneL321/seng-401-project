@@ -16,24 +16,25 @@ const MakeOrder = ({handleMakeOrder, inventory}) => {
         <div>
             <h3>Make an Order</h3>
             <div className='make-order-form-container'>
-                {/* <form onSubmit={}> */}
-                    <Select
-                        options={inventory.map(invItem => ({label: invItem.name, value: invItem.medicationID}))}
-                        onChange={(e) => setMedicationID(e.value)}
+                <p>Select a Medication:</p>
+                <Select
+                    options={inventory.map(invItem => ({label: invItem.name, value: invItem.medicationID}))}
+                    onChange={(e) => setMedicationID(e.value)}
+                />
+                <br/><br/>
+                <label>Enter an amount:</label>
+                <div className="input-container">
+                    <Input
+                        title='Order Amount'
+                        placeholder="Enter amount"
+                        value={amount}
+                        type="number"
+                        onChange={(e) => setAmount(e.target.value)}
                     />
-                    <div className="input-container">
-                        <Input
-                            title='Order Amount'
-                            placeholder="Enter amount"
-                            value={amount}
-                            type="number"
-                            onChange={(e) => setAmount(e.target.value)}
-                        />
-                    </div>
-                    <Button type="button" variant="contained" onClick={() => handleMakeOrder(medicationID, amount)}>
-                        Make Order
-                    </Button>
-                {/* </form> */}
+                </div>
+                <Button type="button" variant="contained" onClick={() => handleMakeOrder(medicationID, amount)}>
+                    Make Order
+                </Button>
                 
             </div>
         </div>

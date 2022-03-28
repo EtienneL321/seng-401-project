@@ -21,15 +21,13 @@ const OrderList = ({ordersInfo, showFulfillOrder, setOrders}) => {
                     {ordersInfo
                     .map((order) => {
                         return (
-                            // <div className='order-item' key={order.prescriptionID}>
                             <tr>
-                                <td>{order.prescriptionID}, </td>
-                                <td>{order.patientName}, </td>
-                                <td>{order.requesteeName}, </td>
-                                <td>{order.medication}, </td>
+                                <td>{order.prescriptionID} </td>
+                                <td>{order.patientName} </td>
+                                <td>{order.requesteeName} </td>
+                                <td>{order.medication} </td>
                                 <Button type="button" variant= "contained" onClick={() => {showFulfillOrder(order)}}> Fulfill Order</Button>
                             </tr>
-                            // </div>
                         );
                     })}
                 </table>

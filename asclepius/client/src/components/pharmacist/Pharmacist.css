@@ -1,7 +1,7 @@
 
 .inventory-table {
     text-align: center;
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', sans-serif;
     border-collapse: collapse;
     border: 3px solid #ddd;
     width: 100%;
@@ -10,6 +10,7 @@
 .inventory-table td, .inventory-table th {
     border: 1px solid #ddd;
     padding: 8px;
+    font-size: 20px;
   }
 
 .inventory-table tr:nth-child(even){background-color: #f2f2f2;}
@@ -60,15 +61,16 @@
 
 .order-table {
     text-align: center;
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', sans-serif;
     border-collapse: collapse;
     border: 3px solid #ddd;
     width: 100%;
+    font-size: 20px;
   }
 
 .order-table td, .inventory-table th {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 8px; 
   }
 
 .order-table tr:nth-child(even){background-color: #f2f2f2;}
