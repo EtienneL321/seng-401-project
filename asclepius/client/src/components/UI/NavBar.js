@@ -15,7 +15,7 @@ const NavBar = () => {
                 
                 <Typography className='app-title-nav' variant="h6" noWrap>
                     <Link to='/home' className='home-btn-nav'>
-                        Ascelpius
+                        Asclepius
                     </Link>
                 </Typography>
                 <div className='pages-nav-navbar'>
