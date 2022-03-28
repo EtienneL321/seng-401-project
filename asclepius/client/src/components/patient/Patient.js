@@ -219,7 +219,7 @@ const Patient = (props) => {
     return (
         <div className="patient-file">
             <div className='patient-top'>
-                <button type="button" variant= "contained" onClick={listRenderHandler}> {buttonText.current} </button>
+                <button type="button" variant="contained" onClick={listRenderHandler}> {buttonText.current} </button>
                 <h2 className='patient-name' onClick={testFunction}>Patient {props.patientFile.patientName}</h2>
                 <h2 className='patient-id'>ID: {props.patientFile.patientID}</h2>
             </div>

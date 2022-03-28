@@ -28,6 +28,8 @@ const Doctor = (props) => {
         } else if (compState === "readyForPickup") {
             return <ViewMedication />
         }
+
+        console.log(compState);
     }
 
     useEffect(() => {
