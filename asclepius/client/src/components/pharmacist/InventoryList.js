@@ -8,7 +8,7 @@ const InventoryList = (props) => {
         <div>
             <h2>Inventory</h2>
             <div className='order-list-container'>
-                <table className="inventory-table">
+                <table className="table">
                     <tr>
                         <th> ID </th>
                         <th> Name </th>

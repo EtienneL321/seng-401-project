@@ -1,5 +1,6 @@
 import React from 'react';
 import './Pharmacist.css';
+import '../CommonUser.css'
 import { Button } from "@material-ui/core";
 
 const OrderList = ({ordersInfo, showFulfillOrder, setOrders}) => {
@@ -10,7 +11,7 @@ const OrderList = ({ordersInfo, showFulfillOrder, setOrders}) => {
         <div>
             <h2>Orders</h2>
             <div className='order-list-container'>
-                <table className="order-table">
+                <table className="table">
                     <tr>
                         <th> Prescription ID </th>
                         <th> Patient Name </th>

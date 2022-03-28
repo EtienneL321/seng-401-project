@@ -56,7 +56,7 @@ const AddMedication = (props) => {
     };
 
     return (
-        <div className="add-patient">
+        <div className="add-med">
             <h2>Add Medication</h2>
             {confirmState ? 
             <Confirm confirmHandler={confirmAddMedication} cancelHandler={cancelAddMedication}>
