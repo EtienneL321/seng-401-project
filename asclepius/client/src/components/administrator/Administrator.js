@@ -36,7 +36,7 @@ const Administrator = (props) => {
     function MainComponentRender(props){
         const compState = props.compState;
         if(compState === "patientListView"){
-            return <PatientRender title={"All patients"} assignedPatientsInfo={allPatients}/>
+            return <PatientRender title={"All patients"} assignedPatientsInfo={allPatients} staffInfo={staffInfo}/>
         }else if (compState === "inventoryView"){
             return <InventoryList inventoryInfo={inventory}/>;
         }else if(compState === "addRemovePatient"){

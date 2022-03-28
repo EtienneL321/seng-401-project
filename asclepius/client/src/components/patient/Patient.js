@@ -16,6 +16,7 @@ const Patient = (props) => {
     const [diagnoses, setDiagnoses] = useState([]);
     const [prescriptions, setPrescriptions] = useState([]);
     const [notes, setNotes] = useState([]);
+    const [staffType, setStaffType] = useState([]);
 
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
@@ -57,7 +58,7 @@ const Patient = (props) => {
                     
                     {/* Will add delete button later */}
                     <div className="buttons">
-                        <button type="button" variant= "contained" onClick={() => {setMainComonentState("addDiagnosis")}}> Add Diagnosis</button>
+                        {staffType === "D" ? <button type="button" variant= "contained" onClick={() => {setMainComonentState("addDiagnosis")}}> Add Diagnosis</button> : null}
                     </div>
 
                     <table className="diagnoses-table">
@@ -83,7 +84,7 @@ const Patient = (props) => {
 
                     {/* Will add delete button later */}
                     <div className="buttons">
-                        <button type="button" variant= "contained" onClick={() => {setMainComonentState("addMedication")}}> Add Medication</button>
+                        { staffType === "A" ? null : <button type="button" variant= "contained" onClick={() => {setMainComonentState("addMedication")}}> Add Medication</button>}
                     </div>
 
                     <table className="diagnoses-table">
@@ -109,7 +110,7 @@ const Patient = (props) => {
 
                      {/* Will add edit button later */}
                      <div className="buttons">
-                        <button type="button" variant= "contained" onClick={() => {setMainComonentState("addNote")}}> Add Note</button>
+                        { staffType === "A" ? null : <button type="button" variant= "contained" onClick={() => {setMainComonentState("addNote")}}> Add Note</button>}
                     </div>
                 </div>
             )
@@ -156,6 +157,7 @@ const Patient = (props) => {
         };
         fetchPatientInformation();
         setMainComonentState("patientView");
+        setStaffType(props.staffInfo.staffType);
     }, [auth, renderState]);
 
     const addDiagnosis = async (newDiagnosis) => {
