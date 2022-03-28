@@ -55,7 +55,7 @@ const Patient = (props) => {
                         })}
                     </table>
                     
-                    {/* Will add delete button late */}
+                    {/* Will add delete button later */}
                     <div className="buttons">
                         <button type="button" variant= "contained" onClick={() => {setMainComonentState("addDiagnosis")}}> Add Diagnosis</button>
                     </div>
@@ -81,6 +81,11 @@ const Patient = (props) => {
                         })}
                     </table>
 
+                    {/* Will add delete button later */}
+                    <div className="buttons">
+                        <button type="button" variant= "contained" onClick={() => {setMainComonentState("addMedication")}}> Add Medication</button>
+                    </div>
+
                     <table className="diagnoses-table">
                         <tr>
                             <th> Created By </th>
@@ -102,7 +107,7 @@ const Patient = (props) => {
                         })}
                     </table>
 
-                     {/* Will add delete button late */}
+                     {/* Will add edit button later */}
                      <div className="buttons">
                         <button type="button" variant= "contained" onClick={() => {setMainComonentState("addNote")}}> Add Note</button>
                     </div>
