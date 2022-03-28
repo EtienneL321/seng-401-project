@@ -8,18 +8,17 @@ import OrderList from './OrderList';
 import InventoryList from './InventoryList';
 import FulfillOrder from './FulfillOrder';
 import MakeOrder from './MakeOrder';
-// import { is } from 'express/lib/request';
+import AddDeleteMedication from './AddDeleteMedication';
 
 const Pharmacist = (props) => {
-    // console.log(props.patients);
     
     const { auth } = useAuth();
     const [staffInfo, setStaffInfo] = useState({});
     const [orders, setOrders] = useState([]);
     const [changeFlag, setChangeFlag] = useState(false);
     const [inventory, setInventory] = useState([]);
-    // console.log(auth);
-
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [mainComponentState, setMainComponentState] = useState("ordersView");
 
@@ -28,22 +27,40 @@ const Pharmacist = (props) => {
     }
     function showInventory(){
         setMainComponentState("inventoryView");
+        setChangeFlag(prev => !prev);
     }
 
     function showFulfillOrder(order){
         setSelectedOrder(order);
         setMainComponentState("fulfillOrder");
+        setChangeFlag(prev => !prev);
     }
 
     function showMakeOrder(){
         setMainComponentState("makeOrderView");
+        setChangeFlag(prev => !prev);
     }
+
+    function showAddDeleteMedication(){
+        setMainComponentState("addDeleteMedication");
+        setChangeFlag(prev => !prev);
+    }
+
+    const handleError = () => {
+        console.log("this is from error handling: ", errorMessage);
+        setErrorMessage("");
+    };
+
+    const handleSuccess = () => {
+        console.log("this is from success handling: ", successMessage);
+        setSuccessMessage("");
+    };
 
     const handleMakeOrder = async (medication_ID, amount) => {
         if(amount <= 0 ){
             alert("Please enter an amount greater than 0.");
         }
-        else if(medication_ID == 0){
+        else if(medication_ID === 0){
             alert("Please choose a medication to order.");
         }
         else{
@@ -68,7 +85,6 @@ const Pharmacist = (props) => {
 
     const handleFulfillOrder = async (order) => {
         let date = new Date();
-        // let currTime = "";
         let currTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate()+ " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
         let prescriptionParams = {
@@ -102,6 +118,47 @@ const Pharmacist = (props) => {
         }
     };
 
+    const handleAddMedication = async (medicationData) => {
+        // add the new medication
+        await axios.post("http://localhost:3001/api/post/medications/new", medicationData).then((response) => {
+            console.log("This is the response from catch: ", response);
+        }).then(() => {
+            // setSuccessMessage("Medication has been added!");
+        }).catch((err) => {
+            setErrorMessage(err.response.data.error);
+        });
+
+        // get its id
+        const medicationRes = await axios.get('http://localhost:3001/api/get/inventory/info/id', {params: medicationData});
+        const medicationID = medicationRes.data[0].medicationID;
+        console.log("Resulting medication id: ", medicationID);
+
+        // add the new inventory item
+        await axios.post("http://localhost:3001/api/post/inventory/new", {medicationID: medicationID, stock: medicationData.stock}).then((response) => {
+            console.log("This is the response from catch: ", response);
+        }).then(() => {
+            setSuccessMessage("Medication has been added!");
+        }).catch((err) => {
+            setErrorMessage(err.response.data.error);
+        });
+        
+        setChangeFlag(!changeFlag);
+    }
+    
+    const handleDeleteMedication = async (medicationData) => {
+        // remove from inventory and medication
+        await axios.delete("http://localhost:3001/api/delete/medication/remove", {params : medicationData}).then((response) => {
+            console.log("This is the response from catch: ", response);
+        }).then(() => {
+            setSuccessMessage("Medication has been removed!");
+        }).catch((err) => {
+            setErrorMessage(err.response.data.error);
+        });
+
+        setChangeFlag(!changeFlag);
+
+    };
+
     function MainComponentRender(props){
         const compState = props.compState;
         if(compState === "ordersView"){
@@ -117,6 +174,9 @@ const Pharmacist = (props) => {
         else if(compState === "makeOrderView"){
             return <MakeOrder handleMakeOrder={handleMakeOrder} inventory={inventory}/>
         }
+        else if(compState === "addDeleteMedication"){
+            return <AddDeleteMedication inventory={inventory} addMedication={handleAddMedication} deleteMedication={handleDeleteMedication} handleError={handleError} handleSuccess={handleSuccess} successMessage={successMessage} errorMessage={errorMessage}/>
+        }
     }
 
     useEffect(() => {
@@ -126,18 +186,16 @@ const Pharmacist = (props) => {
             }
             try {
                 const staffData = await axios.get('http://localhost:3001/api/get/staff/info/id', {params: staff});
-                console.log("Response for the staff data", staffData.data[0]);
+                // console.log("Response for the staff data", staffData.data[0]);
                 setStaffInfo(staffData.data[0]);
 
                 const orderData = await axios.get('http://localhost:3001/api/get/prescriptions/orders');
-                console.log("Response for the order data", orderData.data);
+                // console.log("Response for the order data", orderData.data);
                 setOrders(orderData.data);
-                // setMainComponentState("ordersView");
 
                 const inventoryData = await axios.get('http://localhost:3001/api/get/inventory');
-                console.log("Response for inventory", inventoryData.data);
+                // console.log("Response for inventory", inventoryData.data);
                 setInventory(inventoryData.data);
-                // setInventory
             }
             catch (error){
                 console.error(error);
@@ -161,6 +219,9 @@ const Pharmacist = (props) => {
                         </button>
                         <button type="button" className='nav-btns' onClick={showMakeOrder}>
                             Make Order
+                        </button>
+                        <button type="button" className='nav-btns' onClick={showAddDeleteMedication}>
+                            Add/Delete Medication
                         </button>
                         
                     </div>

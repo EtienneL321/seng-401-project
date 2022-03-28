@@ -276,6 +276,49 @@ app.get("/api/get/medications/info/name", (req, res) => {
     });
 });
 
+// ADD A NEW MEDICATION
+app.post("/api/post/medications/new", (req, res) => {
+
+    givenName = req.body.name;
+    givenClearance = req.body.clearanceNum;
+    givenUse = req.body.use;
+    givenWarnings = req.body.warnings;
+    givenStock = req.body.stock;
+
+    const sqlInsert1 = 
+        "INSERT INTO `Asclepius`.`medications` (`name`, `clearanceNum`, `use`, `warnings`) VALUES (?, ?, ?, ?);";
+    db.query(sqlInsert1, [givenName, givenClearance, givenUse, givenWarnings], (err, result) => {
+        if (err){
+            return res.status(400).send({ error: 'SOME ERROR OCCURED' });
+        }
+        res.send(result);
+    });  
+});
+
+// DELETE A MEDICATION
+app.delete("/api/delete/medication/remove", (req, res) => {
+    const givenID = req.query.medicationID;
+
+    const sqlDeleteInventory = 
+        "DELETE FROM pharm_inventory WHERE pharm_inventory.medicationID=?";
+    db.query(sqlDeleteInventory, [givenID], (err, result) => {
+        if (err){
+            console.log(err);
+            return res.status(400).send({ error: "SOME ERROR OCCURED" });
+        }
+    });
+
+    const sqlDelete = 
+        "DELETE FROM medications WHERE medications.medicationID=?"
+    db.query(sqlDelete, [givenID], (err, result) => {
+        if (err){
+            console.log(err);
+            return res.status(400).send({ error: "SOME ERROR OCCURED" });
+        }
+        res.send(result);
+    });  
+});
+
 // SUPPLIERS
 // GAIN INFO ABOUT ALL SUPPLIERS
 app.get("/api/get/suppliers", (req, res) => {
@@ -363,6 +406,35 @@ app.put("/api/put/inventory/info", (req, res) => {
     });
 });
 
+// GET SPECIFIC INVENTORY ITEM ID
+app.get("/api/get/inventory/info/id", (req, res) => {
+    givenName = req.query.name;
+    givenClearance = req.query.clearanceNum;
+    givenUse = req.query.use;
+    givenWarnings = req.query.warnings;
+
+    const sqlSelect = "select medications.medicationID from `Asclepius`.`medications` where medications.name=? AND medications.clearanceNum=? AND medications.use=? AND medications.warnings=?;";
+    db.query(sqlSelect, [givenName, givenClearance, givenUse, givenWarnings], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+// ADD NEW INVENTORY ITEM
+app.post("/api/post/inventory/new", (req, res) => {
+    givenID = req.body.medicationID;
+    givenStock = req.body.stock;
+
+    const sqlInsert1 = 
+        "INSERT INTO `Asclepius`.`pharm_inventory` (`medicationID`, `amount`) VALUES (?, ?);";
+    db.query(sqlInsert1, [givenID, givenStock], (err, result) => {
+        if (err){
+            console.log(err);
+            return res.status(400).send({ error: 'SOME ERROR OCCURED' });
+        }
+        res.send(result);
+    });  
+});
 
 
 
