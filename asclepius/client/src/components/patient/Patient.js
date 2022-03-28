@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
 import AddDiagnosis from './AddDiagnosis';
+import AddNote from './AddNote';
 import './Patient.css';
 import '../home/HomePage.css';
 
@@ -10,10 +11,11 @@ import '../home/HomePage.css';
 const Patient = (props) => {
 
     const { auth } = useAuth();
-    const [diagnoses, setDiagnoses] = useState([]);
-    const [allDoctors, setAllDoctors] = useState([]);
+    const [allStaff, setAllStaff] = useState([]);
     const [allMedication, setAllMedication] = useState([]);
+    const [diagnoses, setDiagnoses] = useState([]);
     const [prescriptions, setPrescriptions] = useState([]);
+    const [notes, setNotes] = useState([]);
 
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
@@ -25,6 +27,8 @@ const Patient = (props) => {
         const compState = props.compState;
         if (compState === "addDiagnosis") {
             return (<AddDiagnosis addDiagnosis={addDiagnosis}/>)
+        } else if (compState === "addNote") {
+            return (<AddNote addNote={addNote}/>)
         } else if (compState === "patientView") {
             return (
                 <div className='patient-info'>
@@ -42,7 +46,7 @@ const Patient = (props) => {
                                     <td>{d.name}, </td>
                                     <td>{d.comments}, </td>
                                     <td>{d.date.slice(0, 10)}, </td>
-                                    <td>{allDoctors.map(doc => {
+                                    <td>{allStaff.map(doc => {
                                         if (doc.staffID === d.doctorID)
                                             return (doc.Name)
                                      })}, </td>
@@ -76,14 +80,35 @@ const Patient = (props) => {
                             );
                         })}
                     </table>
-                    <div>
-                        Medical Notes
+
+                    <table className="diagnoses-table">
+                        <tr>
+                            <th> Created By </th>
+                            <th> Notes </th>
+                            <th> Date </th>
+                        </tr>
+                        {notes.slice(0, 5)
+                        .map(n => {
+                            return (
+                                <tr key={n.noteID}>
+                                    <td>{allStaff.map(doc => {
+                                        if (doc.staffID === n.careGiverID)
+                                            return (doc.Name)
+                                     })}, </td>
+                                    <td>{n.contents}, </td>
+                                    <td>{n.dateTime.slice(0, 10)}, </td>
+                                </tr>
+                            );
+                        })}
+                    </table>
+
+                     {/* Will add delete button late */}
+                     <div className="buttons">
+                        <button type="button" variant= "contained" onClick={() => {setMainComonentState("addNote")}}> Add Note</button>
                     </div>
                 </div>
             )
         }
-
-        testFunction();
     };
 
     const handleError = () => {
@@ -109,8 +134,13 @@ const Patient = (props) => {
                 );
                 setPrescriptions(prescriptions.data);
 
-                const allDoctors = await axios.get('http://localhost:3001/api/get/staff/doctors');
-                setAllDoctors(allDoctors.data);
+                const notes = await axios.get('http://localhost:3001/api/get/medical_notes',
+                    { params: props.patientFile }
+                );
+                setNotes(notes.data.reverse());
+
+                const allStaff = await axios.get('http://localhost:3001/api/get/staff');
+                setAllStaff(allStaff.data);
 
                 const allMedication = await axios.get('http://localhost:3001/api/get/medications');
                 setAllMedication(allMedication.data);
@@ -123,17 +153,7 @@ const Patient = (props) => {
         setMainComonentState("patientView");
     }, [auth, renderState]);
 
-    const testFunction = () => {
-        console.log("diagnoses", diagnoses);
-        console.log("allDoctors", allDoctors);
-        console.log("props.patientFile", props.patientFile);
-        console.log("props.staffInfo",props.staffInfo);
-        console.log("prescriptions", prescriptions);
-        console.log("allMedication", allMedication);
-    };
-
     const addDiagnosis = async (newDiagnosis) => {
-        testFunction();
         let today = new Date();
         let month = (today.getMonth() + 1 < 10) ? ('0' + (today.getMonth() + 1)) : (today.getMonth() + 1);
         let day = (today.getDate() < 10) ? ('0' + today.getDate()) : today.getDate();
@@ -152,6 +172,37 @@ const Patient = (props) => {
             setErrorMessage(err.response.data.error);
         });
         setRenderState(!renderState);
+    };
+
+    const addNote = async (newNote) => {
+        let today = new Date();
+        let month = (today.getMonth() + 1 < 10) ? ('0' + (today.getMonth() + 1)) : (today.getMonth() + 1);
+        let day = (today.getDate() < 10) ? ('0' + today.getDate()) : today.getDate();
+        today = today.getFullYear() + '-' + month + '-' + day + ' ' + today.getHours() + ':' + today.getMinutes() + '.' + today.getSeconds();
+
+        newNote.dateTime = today.toString();
+        newNote.patientID = props.patientFile.patientID;
+        newNote.careGiverID = props.staffInfo.staffID;
+
+        console.log("Note added will be: ", newNote);
+        await axios.post("http://localhost:3001/api/post/medical_notes/newnotes", newNote).then((response) => {
+            console.log("This is the response from catch: ", response);
+        }).then(() => {
+            setSuccessMessage("Patient has been added!");
+        }).catch((err) => {
+            setErrorMessage(err.response.data.error);
+        });
+        setRenderState(!renderState);
+    };
+
+    const testFunction = () => {
+        console.log("diagnoses", diagnoses);
+        console.log("allStaff", allStaff);
+        console.log("props.patientFile", props.patientFile);
+        console.log("props.staffInfo",props.staffInfo);
+        console.log("prescriptions", prescriptions);
+        console.log("allMedication", allMedication);
+        console.log("notes", notes);
     };
 
     return (

@@ -454,11 +454,11 @@ app.post("/api/post/diagnoses/newdiagnoses", (req, res) => {
     givenDate = req.body.date;
     givenComments = req.body.comments;
     givenPatientID = req.body.patientID;
-    givenDoctorID = req.body.doctorID;
+    givenStaffID = req.body.staffID;
 
     const sqlInsert = 
         "INSERT INTO diagnoses (name, date, comments, patientID, doctorID) VALUES (?,?,?,?,?);"
-    db.query(sqlInsert, [givenName, givenDate, givenComments, givenPatientID, givenDoctorID], (err, result) => {
+    db.query(sqlInsert, [givenName, givenDate, givenComments, givenPatientID, givenStaffID], (err, result) => {
         if (err){
             return res.status(400).send({ error: 'SOME ERROR OCCURED' });
         }
@@ -466,7 +466,7 @@ app.post("/api/post/diagnoses/newdiagnoses", (req, res) => {
     });  
 });
 
-// GAIN INFO ABOUT THE PRESCRIPTION BASED ON ID
+// GAIN INFO ABOUT THE PRESCRIPTION BASED ON PATIENT ID
 app.get("/api/get/prescriptions/patient", (req, res) => {
     givenID = req.query.patientID;
     const sqlSelect = "SELECT * FROM prescriptions where patientID=?";
@@ -475,4 +475,32 @@ app.get("/api/get/prescriptions/patient", (req, res) => {
         //console.log(result);
         res.send(result);
     });
+});
+
+// GET PATIENT NOTES
+app.get("/api/get/medical_notes", (req, res) => {
+    requestedPatientID = req.query.patientID;
+    const sqlSelect = "SELECT * FROM medical_notes WHERE patientID=?";
+    db.query(sqlSelect, [requestedPatientID], (err, result) => {
+        if (err) throw err;
+        //console.log(result);
+        res.send(result);
+    });
+});
+
+// POST NEW NOTE
+app.post("/api/post/medical_notes/newnotes", (req, res) => {
+    givenDate = req.body.dateTime;
+    givenNote = req.body.note;
+    givenPatientID = req.body.patientID;
+    givenStaffID = req.body.careGiverID;
+
+    const sqlInsert = 
+        "INSERT INTO medical_notes (dateTime, contents, patientID, careGiverID) VALUES (?,?,?,?);"
+    db.query(sqlInsert, [givenDate, givenNote, givenPatientID, givenStaffID], (err, result) => {
+        if (err){
+            return res.status(400).send({ error: 'SOME ERROR OCCURED' });
+        }
+        res.send(result);
+    });  
 });
