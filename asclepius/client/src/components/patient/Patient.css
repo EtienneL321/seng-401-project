@@ -41,3 +41,16 @@
 .input-container.Mui-selected{
     background-color: black;
 }
+
+.patient-buttons{
+    padding: 10px;
+    margin-bottom: 20px; 
+}
+
+.patient-buttons > Button{
+    color:black;
+}
+
+.patient-top> Button{
+    color:black;
+}

@@ -5,6 +5,7 @@ import AddDiagnosis from './AddDiagnosis';
 import AddNote from './AddNote';
 import './Patient.css';
 import '../home/HomePage.css';
+import { Button } from "@material-ui/core";
 
 
 
@@ -17,7 +18,7 @@ const Patient = (props) => {
     const [prescriptions, setPrescriptions] = useState([]);
     const [notes, setNotes] = useState([]);
     const [staffType, setStaffType] = useState([]);
-    const buttonText = useRef("<- Back to Patient List");
+    const buttonText = useRef("< Back to Patient List");
 
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
@@ -45,21 +46,21 @@ const Patient = (props) => {
                         .map(d => {
                             return (
                                 <tr key={d.diagnosisID}>
-                                    <td>{d.name}, </td>
-                                    <td>{d.comments}, </td>
-                                    <td>{d.date.slice(0, 10)}, </td>
+                                    <td>{d.name} </td>
+                                    <td>{d.comments} </td>
+                                    <td>{d.date.slice(0, 10)} </td>
                                     <td>{allStaff.map(doc => {
                                         if (doc.staffID === d.doctorID)
                                             return (doc.Name)
-                                     })}, </td>
+                                     })} </td>
                                 </tr>
                             );
                         })}
                     </table>
                     
                     {/* Will add delete button later */}
-                    <div className="buttons">
-                        {staffType === "D" ? <button type="button" variant= "contained" onClick={() => {setMainComonentState("addDiagnosis")}}> Add Diagnosis</button> : null}
+                    <div className="patient-buttons">
+                        {staffType === "D" ? <Button variant= "contained" onClick={() => {setMainComonentState("addDiagnosis")}}> Add Diagnosis</Button> : null}
                     </div>
 
                     <table className="diagnoses-table">
@@ -75,16 +76,16 @@ const Patient = (props) => {
                                     <td>{allMedication.map(med => {
                                         if (med.medicationID === p.medicationID)
                                             return (med.name)
-                                    })}, </td>
-                                    <td>{p.instructions}, </td>
-                                    <td>{p.amount}, </td>
+                                    })} </td>
+                                    <td>{p.instructions} </td>
+                                    <td>{p.amount} </td>
                                 </tr>
                             );
                         })}
                     </table>
 
-                    <div className="buttons">
-                        { staffType === "A" ? null : <button type="button" variant= "contained" onClick={() => {setMainComonentState("addMedication")}}> Add Medication</button>}
+                    <div className="patient-buttons">
+                        { staffType === "A" ? null : <Button variant= "contained" onClick={() => {setMainComonentState("addMedication")}}> Add Medication</Button>}
                     </div>
 
                     <table className="diagnoses-table">
@@ -100,17 +101,17 @@ const Patient = (props) => {
                                     <td>{allStaff.map(doc => {
                                         if (doc.staffID === n.careGiverID)
                                             return (doc.Name)
-                                     })}, </td>
-                                    <td>{n.contents}, </td>
-                                    <td>{n.dateTime.slice(0, 10)}, </td>
+                                     })} </td>
+                                    <td>{n.contents} </td>
+                                    <td>{n.dateTime.slice(0, 10)} </td>
                                 </tr>
                             );
                         })}
                     </table>
 
                      {/* Will add edit button later */}
-                     <div className="buttons">
-                        { staffType === "A" ? null : <button type="button" variant= "contained" onClick={() => {setMainComonentState("addNote")}}> Add Note</button>}
+                     <div className="patient-buttons">
+                        { staffType === "A" ? null : <Button variant= "contained" onClick={() => {setMainComonentState("addNote")}}> Add Note</Button>}
                     </div>
                 </div>
             )
@@ -219,7 +220,7 @@ const Patient = (props) => {
     return (
         <div className="patient-file">
             <div className='patient-top'>
-                <button type="button" variant="contained" onClick={listRenderHandler}> {buttonText.current} </button>
+                <Button variant="contained" onClick={listRenderHandler}> {buttonText.current} </Button>
                 <h2 className='patient-name' onClick={testFunction}>Patient {props.patientFile.patientName}</h2>
                 <h2 className='patient-id'>ID: {props.patientFile.patientID}</h2>
             </div>
