@@ -369,7 +369,6 @@ app.get("/api/get/prescriptions", (req, res) => {
     const sqlSelect = "select prescriptions.prescriptionID, prescriptions.medicationID, prescriptions.amount, prescriptions.instructions, prescriptions.patientID, prescriptions.requesteeID, prescriptions.timeWritten, prescriptions.pharmisistID, prescriptions.timeFulfilled, prescriptions.receiverID, prescriptions.timeReceived from prescriptions";
     db.query(sqlSelect, (err, result) => {
         if (err) throw err;
-        //console.log(result);
         res.send(result);
     });
 });
@@ -380,7 +379,6 @@ app.get("/api/get/prescriptions/info", (req, res) => {
     const sqlSelect = "select prescriptions.prescriptionID, prescriptions.medicationID, prescriptions.amount, prescriptions.instructions, prescriptions.patientID, prescriptions.requesteeID, prescriptions.timeWritten, prescriptions.pharmisistID, prescriptions.timeFulfilled, prescriptions.receiverID, prescriptions.timeReceived from prescriptions where prescriptions.prescriptionID=?";
     db.query(sqlSelect, [givenID], (err, result) => {
         if (err) throw err;
-        //console.log(result);
         res.send(result);
     });
 });
@@ -432,7 +430,6 @@ app.post("/api/post/prescriptions/new", (req, res) => {
         "INSERT INTO `Asclepius`.`prescriptions` (`medicationID`, `amount`, `instructions`, `patientID`, `requesteeID`, `timeWritten`) VALUES (?, ?, ?, ?, ?, ?);";
     db.query(sqlInsert1, [givenMedicationID, givenAmount, givenInstruction, givenPatientID, givenRequestee, givenTime], (err, result) => {
         if (err){
-            console.log(err);
             return res.status(400).send({ error: 'SOME ERROR OCCURED' });
         }
         res.send(result);
@@ -494,7 +491,6 @@ app.post("/api/post/inventory/new", (req, res) => {
         "INSERT INTO `Asclepius`.`pharm_inventory` (`medicationID`, `amount`) VALUES (?, ?);";
     db.query(sqlInsert1, [givenID, givenStock], (err, result) => {
         if (err){
-            console.log(err);
             return res.status(400).send({ error: 'SOME ERROR OCCURED' });
         }
         res.send(result);
@@ -508,7 +504,6 @@ app.get("/api/get/diagnoses", (req, res) => {
     const sqlSelect = "SELECT * FROM diagnoses WHERE patientID=?";
     db.query(sqlSelect, [requestedPatientID], (err, result) => {
         if (err) throw err;
-        //console.log(result);
         res.send(result);
     });
 });
@@ -537,7 +532,6 @@ app.get("/api/get/prescriptions/patient", (req, res) => {
     const sqlSelect = "SELECT * FROM prescriptions where patientID=?";
     db.query(sqlSelect, [givenID], (err, result) => {
         if (err) throw err;
-        //console.log(result);
         res.send(result);
     });
 });
@@ -548,7 +542,6 @@ app.get("/api/get/medical_notes", (req, res) => {
     const sqlSelect = "SELECT * FROM medical_notes WHERE patientID=?";
     db.query(sqlSelect, [requestedPatientID], (err, result) => {
         if (err) throw err;
-        //console.log(result);
         res.send(result);
     });
 });
