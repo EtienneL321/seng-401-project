@@ -440,7 +440,7 @@ app.post("/api/post/prescriptions/new", (req, res) => {
 app.get("/api/get/prescriptions/reqid", (req, res) => {
     givenID = req.query.staffID;
 
-    const sqlSelect = "select prescriptions.prescriptionID, medications.name as medication, prescriptions.medicationID, prescriptions.amount, prescriptions.instructions, patients.Name as patientName, patients.patientID, staff.Name as requesteeName, prescriptions.pharmisistID, staff.staffID from prescriptions, medications, staff, patients where isnull(prescriptions.receiverID) and prescriptions.medicationID=medications.medicationID and prescriptions.patientID=patients.patientID and prescriptions.requesteeID=staff.staffID and prescriptions.requesteeID=?";
+    const sqlSelect = "select prescriptions.prescriptionID, medications.name as medication, prescriptions.medicationID, prescriptions.amount, prescriptions.instructions, patients.Name as patientName, patients.patientID, staff.Name as requesteeName, prescriptions.pharmisistID, staff.staffID from prescriptions, medications, staff, patients where isnull(prescriptions.receiverID) and prescriptions.pharmisistID is not null and prescriptions.medicationID=medications.medicationID and prescriptions.patientID=patients.patientID and prescriptions.requesteeID=staff.staffID and prescriptions.requesteeID=?";
     db.query(sqlSelect, [givenID], (err, result) => {
         if (err) throw err;
         res.send(result);
