@@ -32,6 +32,8 @@ const Patient = (props) => {
             return (<AddDiagnosis addDiagnosis={addDiagnosis}/>)
         } else if (compState === "addNote") {
             return (<AddNote addNote={addNote}/>)
+        } else if (compState === "deleteMedication") {
+            return (<AddNote addNote={addNote}/>)
         } else if (compState === "patientView") {
             return (
                 <div className='patient-info'>
@@ -85,7 +87,7 @@ const Patient = (props) => {
                     </table>
 
                     <div className="patient-buttons">
-                        { staffType === "A" ? null : <Button variant= "contained" onClick={() => {setMainComonentState("addMedication")}}> Add Medication</Button>}
+                        { staffType === "A" ? null : <Button variant= "contained" onClick={() => {setMainComonentState("deleteMedication")}}> Delete Medication </Button>}
                     </div>
 
                     <table className="diagnoses-table">
@@ -172,7 +174,7 @@ const Patient = (props) => {
         newDiagnosis.doctorID = props.staffInfo.staffID;
 
         console.log("Diagnosis added will be: ", newDiagnosis);
-        await axios.post("http://localhost:3001/api/post/diagnoses/newdiagnoses", newDiagnosis).then((response) => {
+        await axios.post("http://localhost:3001/api/post/diagnoses/newdiagnosis", newDiagnosis).then((response) => {
             console.log("This is the response from catch: ", response);
         }).then(() => {
             setSuccessMessage("Patient has been added!");
@@ -201,6 +203,10 @@ const Patient = (props) => {
             setErrorMessage(err.response.data.error);
         });
         setRenderState(!renderState);
+    };
+
+    const deleteMedication = async (medicationID) => {
+        console.log("Medication with ID " + medicationID + " Deleted");
     };
 
     const testFunction = () => {

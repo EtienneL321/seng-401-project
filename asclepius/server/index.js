@@ -509,12 +509,12 @@ app.get("/api/get/diagnoses", (req, res) => {
 });
 
 // POST NEW DIAGNOSIS
-app.post("/api/post/diagnoses/newdiagnoses", (req, res) => {
+app.post("/api/post/diagnoses/newdiagnosis", (req, res) => {
     givenName = req.body.name;
     givenDate = req.body.date;
     givenComments = req.body.comments;
     givenPatientID = req.body.patientID;
-    givenStaffID = req.body.staffID;
+    givenStaffID = req.body.doctorID;
 
     const sqlInsert = 
         "INSERT INTO diagnoses (name, date, comments, patientID, doctorID) VALUES (?,?,?,?,?);"
