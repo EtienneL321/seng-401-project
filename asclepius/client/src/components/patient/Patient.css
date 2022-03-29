@@ -68,3 +68,17 @@
 .diagnosis Button:hover{
     color: black;
 }
+
+.diagnoses-table {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    border-collapse: collapse;
+    border: 3px solid #ddd;
+    width: 100%;
+  }
+
+.diagnoses-table td, .diagnoses-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    font-size: 20px;
+  }
