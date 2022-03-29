@@ -118,3 +118,17 @@
 .make-order-form-container > Button:hover{
     color:black;
 }
+
+.add-med > form {
+    width: 50%;
+    margin: auto;
+}
+
+.add-med > form > div {
+    padding: 10px;
+}
+
+.add-med > form > button{
+    color:black;
+    margin-bottom: 20px;
+}

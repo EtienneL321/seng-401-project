@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 import Confirm from "../UI/Messages/Confirm";
 import '../UI/CommonUI.css';
+import './Pharmacist.css';
 
 const AddMedication = (props) => {
 
