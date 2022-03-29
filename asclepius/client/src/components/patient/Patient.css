@@ -5,7 +5,9 @@
 .patient-info {
     margin-top: 30px;
     margin-left: 45px;
+    height: 550px;
     text-align: left;
+    overflow-y:scroll;
 }
 
 .patient-top {
@@ -53,4 +55,16 @@
 
 .patient-top> Button{
     color:black;
+}
+
+.diagnosis {
+    margin: 80px;
+}
+
+.diagnosis Button{
+    margin: 40px;
+}
+
+.diagnosis Button:hover{
+    color: black;
 }

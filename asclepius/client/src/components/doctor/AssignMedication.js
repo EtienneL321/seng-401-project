@@ -76,6 +76,7 @@ const AssignMedication = (props) => {
                         value={amount}
                         type="number"
                         onChange={(e) => setAmount(e.target.value)}
+                        style = {{width: '50%', fontSize: 20}}
                     />
                     <br/> <br/>
                     <Input
@@ -84,6 +85,7 @@ const AssignMedication = (props) => {
                         value={instructions}
                         type="text"
                         onChange={(e) => setInstructions(e.target.value)}
+                        style = {{width: '80%', fontSize: 20, textAlign: "center"}}
                     />
                     <br/> <br/>
                     <Button variant="contained" type="submit" className= "assign-button">Order Prescription</Button>

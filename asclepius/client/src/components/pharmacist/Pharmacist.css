@@ -66,7 +66,11 @@
     border: 3px solid #ddd;
     width: 100%;
     font-size: 20px;
-  }
+  } 
+
+.order-table > tr > td > button:hover{
+    color:black;
+}
 
 .order-table td, .inventory-table th {
     border: 1px solid #ddd;

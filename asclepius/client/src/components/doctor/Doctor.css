@@ -1,0 +1,13 @@
+
+.patient-selection Select{
+    font: 700;
+}
+
+.patient-selection Input{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.patient-selection > button:hover {
+    color:black;
+}

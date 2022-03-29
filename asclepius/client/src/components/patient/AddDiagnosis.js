@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Input from "@material-ui/core/Input";
+import { Button } from "@material-ui/core";
 import './Patient.css';
 
 const AddDiagnosis = (props) => {
@@ -15,28 +16,30 @@ const AddDiagnosis = (props) => {
     };
 
     return (
-        <div>
-            <div className="login-item">
-              <p>Diagnosis Name</p>
-              <div className="input-container">
+        <div className="diagnosis">
+            <div>
+              <h3>Diagnosis Name</h3>
+              <div className="diagnosis-input">
                 <Input
                   placeholder="Name..."
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  style = {{width: '40%'}}
                 />
               </div>
             </div>
-            <div className="login-item">
-              <p>Diagnosis Comments</p>
-              <div className="input-container">
+            <div>
+              <h3>Diagnosis Comments</h3>
+              <div className="diagnosis-input">
                 <Input
                   placeholder="Comments..."
                   value={comments}
                   onChange={(e) => setComments(e.target.value)}
+                  style = {{width: '70%'}}
                 />
               </div>
             </div>
-            <button type="button" variant= "contained" onClick={addDiagnosisHandler}> Add Diagnosis</button>
+            <Button variant= "contained" onClick={addDiagnosisHandler}> Add Diagnosis</Button>
         </div>
     )
 };
