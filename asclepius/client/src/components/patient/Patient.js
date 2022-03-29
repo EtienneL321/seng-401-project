@@ -3,6 +3,7 @@ import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
 import AddDiagnosis from './AddDiagnosis';
 import AddNote from './AddNote';
+import DeleteMedication from './DeleteMedication';
 import './Patient.css';
 import '../home/HomePage.css';
 import { Button } from "@material-ui/core";
@@ -33,7 +34,7 @@ const Patient = (props) => {
         } else if (compState === "addNote") {
             return (<AddNote addNote={addNote}/>)
         } else if (compState === "deleteMedication") {
-            return (<AddNote addNote={addNote}/>)
+            return (<DeleteMedication deleteMedication={deleteMedication} prescriptions={prescriptions} medication={allMedication}/>)
         } else if (compState === "patientView") {
             return (
                 <div className='patient-info'>
@@ -205,8 +206,16 @@ const Patient = (props) => {
         setRenderState(!renderState);
     };
 
-    const deleteMedication = async (medicationID) => {
-        console.log("Medication with ID " + medicationID + " Deleted");
+    const deleteMedication = async (ID) => {
+        console.log("Medication deleted is ", ID);
+        await axios.delete("http://localhost:3001/api/delete/prescription/remove", { params: ID }).then((response) => {
+            console.log("This is the response from catch: ", response);
+        }).then(() => {
+            setSuccessMessage("Patient has been added!");
+        }).catch((err) => {
+            setErrorMessage(err.response.data.error);
+        });
+        setRenderState(!renderState);
     };
 
     const testFunction = () => {

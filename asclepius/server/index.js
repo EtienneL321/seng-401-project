@@ -553,11 +553,29 @@ app.post("/api/post/medical_notes/newnotes", (req, res) => {
     givenPatientID = req.body.patientID;
     givenStaffID = req.body.careGiverID;
 
+    console.log(givenNote);
+
     const sqlInsert = 
         "INSERT INTO medical_notes (dateTime, contents, patientID, careGiverID) VALUES (?,?,?,?);"
     db.query(sqlInsert, [givenDate, givenNote, givenPatientID, givenStaffID], (err, result) => {
         if (err){
             return res.status(400).send({ error: 'SOME ERROR OCCURED' });
+        }
+        res.send(result);
+    });  
+});
+
+// DELETE A PRESCRIPTION
+app.delete("/api/delete/prescription/remove", (req, res) => {
+    const givenID = req.query.ID;
+    console.log(givenID);
+
+    const sqlDelete = 
+        "DELETE FROM prescriptions WHERE prescriptions.prescriptionID=?"
+    db.query(sqlDelete, [givenID], (err, result) => {
+        if (err){
+            console.log(err);
+            return res.status(400).send({ error: "SOME ERROR OCCURED" });
         }
         res.send(result);
     });  
