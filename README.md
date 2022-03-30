@@ -8,11 +8,15 @@ To access the system by running the website on localhost
 
 prerequisites: Have node.js installed on device.
 
-To run just the node Client side  
-npm start
+To run the Client side  
+- navigate to asclepius/client
+- - run `npm i`
+- run `npm start`
 
-To run with nodemon for automatic updates onthe server
-npm run watch
+To run the server
+- navigate to asclepius/server
+- run `npm i`
+- run `npm run start`
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
