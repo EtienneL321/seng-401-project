@@ -43,7 +43,7 @@ public class AdminAssignStaffTestTest {
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   @Test
   public void adminAssignStaffTest() {
-    driver.get("http://localhost:3000/login");
+    driver.get("https://asclepius-client-management.netlify.app/login");
     driver.manage().window().setSize(new Dimension(1375, 1257));
     driver.findElement(By.xpath("//div[@id=\'root\']/main/div/div[2]/div/form/div/div/div/input")).click();
     driver.findElement(By.xpath("//div[@id=\'root\']/main/div/div[2]/div/form/div/div/div/input")).sendKeys("acai");
