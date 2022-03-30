@@ -10,7 +10,7 @@ prerequisites: Have node.js installed on device.
 
 To run the Client side  
 - navigate to asclepius/client
-- - run `npm i`
+- run `npm i`
 - run `npm start`
 
 To run the server
