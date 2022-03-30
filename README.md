@@ -18,6 +18,8 @@ To run the server
 - run `npm i`
 - run `npm run start`
 
+Application will open on `localhost:3000` and `/login` is the home page
+
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 To access the system via any web browser use this link:
