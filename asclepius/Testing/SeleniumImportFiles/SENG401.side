@@ -10,7 +10,7 @@
       "id": "623d1712-d2d2-44ca-8f32-087bb8d65567",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -105,7 +105,7 @@
       "id": "1971a12d-5ee4-45bf-a62e-4e0b47afc150",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -203,7 +203,7 @@
       "id": "789da570-07ce-4363-a6cc-a55a01febfa8",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -413,7 +413,7 @@
       "id": "9ae64c0f-bfd8-47a5-9c4c-8990625702df",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -609,7 +609,7 @@
       "id": "e9619ba3-8c9b-4ed0-a11d-3a6a9252be54",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -764,7 +764,7 @@
       "id": "f8df2ec0-2d40-4196-bac8-c27a4a5efbf8",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -951,7 +951,7 @@
       "id": "11b854f2-364a-49b9-9787-350b58ef11f7",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -1115,7 +1115,7 @@
       "id": "5291a480-c5c9-4455-b9be-9fe665b2070c",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -1303,7 +1303,7 @@
       "id": "8b2fd55c-155f-4786-8082-dff0e62d05df",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -1423,7 +1423,7 @@
       "id": "32413eb3-9fc3-4e7a-811d-0e9454f5e348",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -1544,7 +1544,7 @@
       "id": "b9d6c8ea-3b95-48ef-a954-84e9d821b172",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -1754,7 +1754,7 @@
       "id": "7993580e-d1b2-4d75-b507-0009255ae986",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -1918,7 +1918,7 @@
       "id": "ee3186bc-0e3f-42e3-8e38-ee391f6346ed",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -2013,7 +2013,7 @@
       "id": "61db0e57-be58-4895-af24-de12a36243ca",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -2188,7 +2188,7 @@
       "id": "cdba6b53-a309-42cf-ac9a-2a77ca935c07",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -2352,7 +2352,7 @@
       "id": "97347b58-7352-4fd5-aec9-6cdd20f7f667",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -2541,7 +2541,7 @@
       "id": "2234cc12-a5b1-4972-b833-8bca479ff4b3",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
@@ -2715,7 +2715,7 @@
       "id": "a1b81101-51e4-4136-b95a-044f58afa101",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:3000/login",
+      "target": "https://asclepius-client-management.netlify.app/login",
       "targets": [],
       "value": ""
     }, {
